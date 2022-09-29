@@ -13,35 +13,31 @@ label sim_freq(10000)
 label idle_adjust(0.994)
 label idle_cfm(0.1)
 
-/*fuel options:
+/*fuel options:Fuels are not working other than pump gas without ethanol
 pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
 afr12.5 14.7 12.5 14.7    11.9 14.1     11.9 14.1     6.98 9.76   6.429 9.0    34.3 34.3 1.7 1.7
 */
 //fuel setting
-label type_of_fuel(pumpus93gas)
-float power_afr(13.5)
+label type_of_fuel(pumpus87gas)							//Fuel type in use
+float tune_afr(13.5)									//afr engine runs at WOT
 
 //engine layout
 label crank_stroke(102 * units.mm)						//LL8 102.00
 label crank_mass(25 * units.kg)							//LL8 ???.00/25
 label crank_flywheel_mass(13.15 * units.kg)				//LL8 ???.00/13.15
 label piston_bore_diameter(93 * units.mm)				//LL8  93.00
-label piston_comp_height(28.73 * units.mm)				//LL8  28.73
+label piston_comp_height(27.94 * units.mm)				//LL8  27.94
 label piston_mass_wpin(574 * units.g)					//LL8 574.00
-label piston_pin_position(0.0)							//LL8   0.00
-label piston_dome_vol(0.0) //Positive is dome			//LL8 ???.00/0
 label rod_length(152 * units.mm)						//LL8 152.00
 label rod_mass(730 * units.g)							//LL8 730.00
 label eng_compression_ratio(10.3)						//LL8  10.30
-//label eng_deck2piston_clearance(1 * units.mm)	//best to ignore and use bulk term calc from CR
 label eng_rot_friction_torq(70 * units.Nm)				//LL8 ???.00/10
 
 //head
-//label head_combustion_chamber_vol(68.0 * units.cc) //best to ignore and use bulk term calc from CR //LL8 ???.00/68
 label head_int_runner_vol(188.0 * units.cc)				//LL8 188.00
-label head_int_runner_xsec_area(24.4 * units.cm2)		//LL8  24.40
+label head_int_runner_xsec_area(24.40 * units.cm2)		//LL8  24.40
 label head_exh_runner_vol(83 * units.cc)				//LL8  83.00
-label head_exh_runner_xsec_area(18 * units.cm2)			//LL8 ???.00
+label head_exh_runner_xsec_area(18.00 * units.cm2)			//LL8 ???.00
 //head flow
 //intake
 label int_flow_scalar(1.0)
@@ -76,8 +72,8 @@ label exh_flow_lift_12(162.3 * exh_flow_scalar)
 label int_throttle_cfm(920)								//LL8 ???/920
 label int_man_plenum_vol(0.7 * units.L)					//LL8 ???/1.5
 label int_man_plenum_xsec_area(75.0 * units.cm2)		//LL8 ???/100
-label int_man_runner_flow_rate(600)						//LL8 ???/500
-label int_man_runner_length(75 * units.mm)				//LL8 ???/100
+label int_man_runner_flow_rate(615)						//LL8 ???/500
+label int_man_runner_length(86 * units.mm)				//LL8 ???/100
 
 //camshaft
 label cam_int_dur_050(170 * units.deg)					//LL8 170,
@@ -92,33 +88,32 @@ label cam_inner_base_circle(22 * units.mm)			//LL8 ???/25.4
 
 //exhaust
 label exh_primary_length(225 * units.mm)					//LL8 ???/
-label exh_primary_flow_rate(500)
-label exh_collector_flow_rate(1000)
-label exh_collector_dia(57 * units.mm)
+label exh_primary_flow_rate(200)
+label exh_collector_flow_rate(550)
+label exh_collector_dia(63.5 * units.mm)
 label exh_length_after_collector(1500 * units.mm)
 
 //timing
 label timing_advance(0.0)
-label timing_multiplier(1.0)
-label timing_rpm_0000((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_0500((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_1000((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_1500((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_2000((2 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_2500((5 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_3000((7 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_3500((9 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_4000((12 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_4500((16 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_5000((23 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_5500((25 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_6000((27 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_6500((27 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_7000((27 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_7500((27 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_8000((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_8500((1 * timing_multiplier + timing_advance) * units.deg)
-label timing_rpm_9000((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_0000((1 + timing_advance) * units.deg)
+label timing_rpm_0500((1 + timing_advance) * units.deg)
+label timing_rpm_1000((2 + timing_advance) * units.deg)
+label timing_rpm_1500((5 + timing_advance) * units.deg)
+label timing_rpm_2000((5 + timing_advance) * units.deg)
+label timing_rpm_2500((5 + timing_advance) * units.deg)
+label timing_rpm_3000((5 + timing_advance) * units.deg)
+label timing_rpm_3500((6 + timing_advance) * units.deg)
+label timing_rpm_4000((8 + timing_advance) * units.deg)
+label timing_rpm_4500((11 + timing_advance) * units.deg)
+label timing_rpm_5000((16 + timing_advance) * units.deg)
+label timing_rpm_5500((18 + timing_advance) * units.deg)
+label timing_rpm_6000((20 + timing_advance) * units.deg)
+label timing_rpm_6500((22 + timing_advance) * units.deg)
+label timing_rpm_7000((24 + timing_advance) * units.deg)
+label timing_rpm_7500((26 + timing_advance) * units.deg)
+label timing_rpm_8000((15 + timing_advance) * units.deg)
+label timing_rpm_8500((15 + timing_advance) * units.deg)
+label timing_rpm_9000((15 + timing_advance) * units.deg)
 
 //rev limits
 label redline_engine(6500 * units.rpm)
@@ -136,11 +131,16 @@ float cylinder_vol(constants.pi * (piston_bore_diameter / 2) * (piston_bore_diam
 float comb_vol_by_CR(cylinder_vol / (eng_compression_ratio - 1.0))
 float exh_volume(exh_length_after_collector * circle_area(exh_collector_dia / 2))
 
+//not in use. calculating with alternate method, CR based
+//label piston_dome_vol(0.0)//Positive is dome			//LL8 ???.00/0
+//label eng_deck2piston_clearance(1 * units.mm) 		//LL8 ???
+//label head_combustion_chamber_vol(64.0 * units.cc)	//LL8 ???.00/64
+//label piston_pin_position(0.0)							//LL8   0.00
 
 //fuels setup
 //pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
 fuel pumpus87gas(
-    name: "pumpus93gas",
+    name: "pumpus87gas",
     molecular_mass: 90 * units.g,
     energy_density: 44 * units.kJ / units.g,
     density: 0.73 * units.kg / units.L,
@@ -307,8 +307,8 @@ public node i6_firing_153624 {
     piston_parameters piston_params(
         mass: piston_mass_wpin,
         compression_height: piston_comp_height,
-        wrist_pin_position: piston_pin_position,
-        displacement: piston_dome_vol
+        wrist_pin_position: 0.0,
+        displacement: 0.0
     )
 
     connecting_rod_parameters cr_params(
@@ -611,7 +611,7 @@ public node TB_plenum_runner_intake {
 	input plenum_cross_section_area: int_man_plenum_xsec_area;
 	input runner_flow_rate: k_carb(int_man_runner_flow_rate);
 	input runner_length: int_man_runner_length;
-	input molecular_afr: power_afr;
+	input molecular_afr: tune_afr;
 
     alias output __out: intake;
 
