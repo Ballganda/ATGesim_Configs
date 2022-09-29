@@ -5,21 +5,26 @@ constants constants()
 impulse_response_library ir_lib()
 
 // engine_name
-label engine_name("generic_i6_firing_153624_R0_2")
+label engine_name("i6_firing_153624")
 
-label sim_freq(7000)
+label sim_freq(10000)
 
 //idle adjustment
-label idle_adjust(0.996)
+label idle_adjust(0.994)
 label idle_cfm(0.1)
 
-//fuel options: 
-label type_of_fuel(pump93gas)
+/*fuel options:
+pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
+afr12.5 14.7 12.5 14.7    11.9 14.1     11.9 14.1     6.98 9.76   6.429 9.0    34.3 34.3 1.7 1.7
+*/
+//fuel setting
+label type_of_fuel(pumpus93gas)
+float power_afr(13.5)
 
 //engine layout
 label crank_stroke(102 * units.mm)						//LL8 102.00
-label crank_mass(20 * units.kg)							//LL8 ???.00/20
-label crank_flywheel_mass(8 * units.kg)				//LL8 ???.00/10
+label crank_mass(25 * units.kg)							//LL8 ???.00/25
+label crank_flywheel_mass(13.15 * units.kg)				//LL8 ???.00/13.15
 label piston_bore_diameter(93 * units.mm)				//LL8  93.00
 label piston_comp_height(28.73 * units.mm)				//LL8  28.73
 label piston_mass_wpin(574 * units.g)					//LL8 574.00
@@ -28,15 +33,15 @@ label piston_dome_vol(0.0) //Positive is dome			//LL8 ???.00/0
 label rod_length(152 * units.mm)						//LL8 152.00
 label rod_mass(730 * units.g)							//LL8 730.00
 label eng_compression_ratio(10.3)						//LL8  10.30
-label eng_deck2piston_clearance(1 * units.mm)			//LL8 ???.00/2
-label eng_rot_friction_torq(25 * units.Nm)				//LL8 ???.00/10
+//label eng_deck2piston_clearance(1 * units.mm)	//best to ignore and use bulk term calc from CR
+label eng_rot_friction_torq(70 * units.Nm)				//LL8 ???.00/10
 
 //head
-label head_combustion_chamber_vol(68.0 * units.cc)		//LL8 ???.00/38
+//label head_combustion_chamber_vol(68.0 * units.cc) //best to ignore and use bulk term calc from CR //LL8 ???.00/68
 label head_int_runner_vol(188.0 * units.cc)				//LL8 188.00
 label head_int_runner_xsec_area(24.4 * units.cm2)		//LL8  24.40
 label head_exh_runner_vol(83 * units.cc)				//LL8  83.00
-label head_exh_runner_xsec_area(20 * units.cm2)			//LL8 ???.00
+label head_exh_runner_xsec_area(18 * units.cm2)			//LL8 ???.00
 //head flow
 //intake
 label int_flow_scalar(1.0)
@@ -71,8 +76,8 @@ label exh_flow_lift_12(162.3 * exh_flow_scalar)
 label int_throttle_cfm(920)								//LL8 ???/920
 label int_man_plenum_vol(0.7 * units.L)					//LL8 ???/1.5
 label int_man_plenum_xsec_area(75.0 * units.cm2)		//LL8 ???/100
-label int_man_runner_flow_rate(400)						//LL8 ???/500
-label int_man_runner_length(100 * units.mm)				//LL8 ???/100
+label int_man_runner_flow_rate(600)						//LL8 ???/500
+label int_man_runner_length(75 * units.mm)				//LL8 ???/100
 
 //camshaft
 label cam_int_dur_050(170 * units.deg)					//LL8 170,
@@ -82,63 +87,168 @@ label valve_exh_lift(9.525 * units.mm)					//LL8 9.525
 label cam_lobe_separation(112 * units.deg)				//LL8 112,
 label cam_advance(0 * units.deg)						//LL8 ???/0
 label cam_int_vvt(0 * units.deg)
-label cam_exh_vvt(-16 * units.deg)
+label cam_exh_vvt(-24 * units.deg)
 label cam_inner_base_circle(22 * units.mm)			//LL8 ???/25.4
 
 //exhaust
-label exh_primary_length(10 * units.cm)					//LL8 ???/15
-label exh_primary_flow_rate(300)
-label exh_collector_flow_rate(800)
-label exh_collector_dia(51 * units.mm)
-label exh_volume(5 * units.L)					//LL8 ???/1.5
-
+label exh_primary_length(225 * units.mm)					//LL8 ???/
+label exh_primary_flow_rate(500)
+label exh_collector_flow_rate(1000)
+label exh_collector_dia(57 * units.mm)
+label exh_length_after_collector(1500 * units.mm)
 
 //timing
 label timing_advance(0.0)
-label timing_rpm_0000((0 + timing_advance) * units.deg)
-label timing_rpm_0500((1 + timing_advance) * units.deg)
-label timing_rpm_1000((1 + timing_advance) * units.deg)
-label timing_rpm_1500((1 + timing_advance) * units.deg)
-label timing_rpm_2000((1 + timing_advance) * units.deg)
-label timing_rpm_2500((5 + timing_advance) * units.deg)
-label timing_rpm_3000((7 + timing_advance) * units.deg)
-label timing_rpm_3500((10 + timing_advance) * units.deg)
-label timing_rpm_4000((12 + timing_advance) * units.deg)
-label timing_rpm_4500((15 + timing_advance) * units.deg)
-label timing_rpm_5000((15 + timing_advance) * units.deg)
-label timing_rpm_5500((20 + timing_advance) * units.deg)
-label timing_rpm_6000((20 + timing_advance) * units.deg)
-label timing_rpm_6500((20 + timing_advance) * units.deg)
-label timing_rpm_7000((-10 + timing_advance) * units.deg)
-label timing_rpm_7500((-15 + timing_advance) * units.deg)
-label timing_rpm_8000((-20 + timing_advance) * units.deg)
-label timing_rpm_8500((-20 + timing_advance) * units.deg)
-label timing_rpm_9000((-20 + timing_advance) * units.deg)
+label timing_multiplier(1.0)
+label timing_rpm_0000((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_0500((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_1000((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_1500((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_2000((2 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_2500((5 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_3000((7 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_3500((9 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_4000((12 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_4500((16 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_5000((23 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_5500((25 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_6000((27 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_6500((27 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_7000((27 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_7500((27 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_8000((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_8500((1 * timing_multiplier + timing_advance) * units.deg)
+label timing_rpm_9000((1 * timing_multiplier + timing_advance) * units.deg)
 
 //rev limits
 label redline_engine(6500 * units.rpm)
-label rev_limit_cutout(9000 * units.rpm)
+label rev_limit_cutout(7500 * units.rpm)
 label rev_cut_duration(0.05)
-label rev_limit_ignition(9000 * units.rpm)
+label rev_limit_ignition(7500 * units.rpm)
 
 //starter
-label start_torque(300 * units.lb_ft)
+label start_torque(150 * units.lb_ft)
 label start_rpm(400 * units.rpm)
 
 //calculations
 label cycle(2 * 360 * units.deg)
-//float squish_bore_vol(constants.pi * (piston_bore_diameter * piston_bore_diameter / 4) * eng_deck2piston_clearance)
-//float cylinder_vol(constants.pi * (piston_bore_diameter * piston_bore_diameter / 4) * crank_stroke)
-//float squish_tot_comb_vol(cylinder_vol / (eng_compression_ratio - 1))
-//float squish_vol_4_cr(squish_tot_comb_vol - head_combustion_chamber_vol + piston_dome_vol - squish_bore_vol)
-//label comb_vol_by_CR((squish_vol_4_cr + head_combustion_chamber_vol) * units.mm3)
+float cylinder_vol(constants.pi * (piston_bore_diameter / 2) * (piston_bore_diameter / 2) * crank_stroke)
+float comb_vol_by_CR(cylinder_vol / (eng_compression_ratio - 1.0))
+float exh_volume(exh_length_after_collector * circle_area(exh_collector_dia / 2))
 
-fuel pump93gas(
-    name: "pump93gas",
-    molecular_mass: 100 * units.g,
-    energy_density: 48.1 * units.kJ / units.g,
-    density: 0.755 * units.kg / units.L,
-    molecular_afr: 14.7,
+
+//fuels setup
+//pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
+fuel pumpus87gas(
+    name: "pumpus93gas",
+    molecular_mass: 90 * units.g,
+    energy_density: 44 * units.kJ / units.g,
+    density: 0.73 * units.kg / units.L,
+    molecular_afr: 12.5,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pumpus93gas(
+    name: "pumpus93gas",
+    molecular_mass: 90 * units.g,
+    energy_density: 44 * units.kJ / units.g,
+    density: 0.73 * units.kg / units.L,
+    molecular_afr: 12.5,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_us87e10(
+    name: "pump_us87e10",
+    molecular_mass: 85.6 * units.g,
+    energy_density: 42.6 * units.kJ / units.g,
+    density: 0.736 * units.kg / units.L,
+    molecular_afr: 11.9,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_us93e10(
+    name: "pump_us93e10",
+    molecular_mass: 85.6 * units.g,
+    energy_density: 42.6 * units.kJ / units.g,
+    density: 0.736 * units.kg / units.L,
+    molecular_afr: 11.9,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_use85(
+    name: "pump_use85",
+    molecular_mass: 52.6 * units.g,
+    energy_density: 32.6 * units.kJ / units.g,
+    density: 0.784 * units.kg / units.L,
+    molecular_afr: 6.98,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_use100(
+    name: "pump_use100",
+    molecular_mass: 46.1 * units.g,
+    energy_density: 29.8 * units.kJ / units.g,
+    density: 0.794 * units.kg / units.L,
+    molecular_afr: 9.00,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel hydrogen(
+    name: "hydrogen",
+    molecular_mass: 2.02 * units.g,
+    energy_density: 120.0 * units.kJ / units.g,
+    density: 0.0696 * units.kg / units.L,
+    molecular_afr: 34.3,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel nitromethane(
+    name: "nitromethane",
+    molecular_mass: 61.04 * units.g,
+    energy_density: 11.3 * units.kJ / units.g,
+    density: 1.14 * units.kg / units.L,
+    molecular_afr: 1.7,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel AvGas(
+    name: "AvGas",
+    molecular_mass: 185 * units.g,
+    energy_density: 45.0 * units.kJ / units.g,
+    density: 0.72 * units.kg / units.L,
+    molecular_afr: 15,
     max_burning_efficiency: 0.8,
     burning_efficiency_randomness: 0.5,
     low_efficiency_attenuation: 0.6,
@@ -146,7 +256,7 @@ fuel pump93gas(
     max_dilution_effect: 10.0
 )
 
-public node generic_i6_firing_153624_R0_2 {
+public node i6_firing_153624 {
     alias output __out: engine;
 
     engine engine(
@@ -171,8 +281,15 @@ public node generic_i6_firing_153624_R0_2 {
         position_y: 0.0,
         tdc: 120.0 * units.deg
     )
-
+/*
     rod_journal rj0(angle: 0.0)
+    rod_journal rj1(angle: 120*units.deg)
+    rod_journal rj2(angle: 240*units.deg)
+    rod_journal rj3(angle: 240*units.deg)
+    rod_journal rj4(angle: 120*units.deg)
+    rod_journal rj5(angle: 0*units.deg)
+*/
+	    rod_journal rj0(angle: 0.0)
     rod_journal rj1(angle: 120*units.deg)
     rod_journal rj2(angle: 240*units.deg)
     rod_journal rj3(angle: 240*units.deg)
@@ -203,12 +320,11 @@ public node generic_i6_firing_153624_R0_2 {
 
     cylinder_bank_parameters bank_params(
         bore: piston_bore_diameter,
-        deck_height: crank_stroke / 2 + rod_length + piston_comp_height + eng_deck2piston_clearance
+        deck_height: crank_stroke / 2 + rod_length + piston_comp_height // + eng_deck2piston_clearance
     )
 	
-    TB_plenum_runner_intake intake(
-	)
-
+	TB_plenum_runner_intake intake()
+	
     exhaust_system_parameters es_params(
         outlet_flow_rate: k_carb(exh_collector_flow_rate),
         primary_tube_length: exh_primary_length,
@@ -431,8 +547,8 @@ private node add_flow_sample {
 public node I6_153624_head {
     input intake_camshaft;
     input exhaust_camshaft;
-    input chamber_volume: head_combustion_chamber_vol;
-	//input chamber_volume: comb_vol_by_CR;
+    //input chamber_volume: head_combustion_chamber_vol;
+	input chamber_volume: comb_vol_by_CR;
     input flip_display: false;
 	
 	input flow_attenuation: 1.0;
@@ -472,8 +588,8 @@ public node I6_153624_head {
         .add_flow_sample(12 * lift_scale, exh_flow_lift_12 * flow_attenuation)
 
     cylinder_head head(
-        chamber_volume: head_combustion_chamber_vol,
-		//chamber_volume: comb_vol_by_CR,
+        //chamber_volume: head_combustion_chamber_vol,
+		chamber_volume: comb_vol_by_CR,
         intake_runner_volume: head_int_runner_vol,
         intake_runner_cross_section_area: head_int_runner_xsec_area,
 		exhaust_runner_volume: head_exh_runner_vol,
@@ -491,17 +607,23 @@ public node TB_plenum_runner_intake {
     input carburetor_cfm: int_throttle_cfm;
     input idle_flow_rate_cfm: idle_cfm;
     input idle_throttle_plate_position: idle_adjust;
+	input plenum_volume: int_man_plenum_vol;
+	input plenum_cross_section_area: int_man_plenum_xsec_area;
+	input runner_flow_rate: k_carb(int_man_runner_flow_rate);
+	input runner_length: int_man_runner_length;
+	input molecular_afr: power_afr;
 
     alias output __out: intake;
 
     intake intake(
-        plenum_volume: int_man_plenum_vol,
-        plenum_cross_section_area: int_man_plenum_xsec_area,
+        plenum_volume: plenum_volume,
+        plenum_cross_section_area: plenum_cross_section_area,
         intake_flow_rate: k_carb(carburetor_cfm),
         idle_flow_rate: k_carb(idle_flow_rate_cfm),
         idle_throttle_plate_position: idle_throttle_plate_position,
-        runner_flow_rate: k_carb(int_man_runner_flow_rate),
+        runner_flow_rate: runner_flow_rate,
         runner_length: int_man_runner_length,
+		molecular_afr: molecular_afr,
         velocity_decay: 0.1
     )
 }
