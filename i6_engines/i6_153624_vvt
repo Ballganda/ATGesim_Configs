@@ -7,10 +7,10 @@ impulse_response_library ir_lib()
 // engine_name
 label engine_name("i6_153624_vvt")
 
-label sim_freq(10000)
+label sim_freq(5000)
 
 //idle adjustment
-label idle_adjust(0.994)
+label idle_adjust(0.993)
 label idle_cfm(0.1)
 
 /*fuel options:Fuels are not working other than pump gas without ethanol
@@ -71,49 +71,49 @@ label exh_flow_lift_12(162.3 * exh_flow_scalar)
 //intake manifold 
 label int_throttle_cfm(920)								//LL8 ???/920
 label int_man_plenum_vol(0.7 * units.L)					//LL8 ???/1.5
-label int_man_plenum_xsec_area(75.0 * units.cm2)		//LL8 ???/100
-label int_man_runner_flow_rate(615)						//LL8 ???/500
-label int_man_runner_length(86 * units.mm)				//LL8 ???/100
+label int_man_plenum_xsec_area(100.0 * units.cm2)		//LL8 ???/100
+label int_man_runner_flow_rate(320)						//LL8 ???/500
+label int_man_runner_length(175 * units.mm)				//LL8 ???/100
 
 //camshaft
 label cam_int_dur_050(170 * units.deg)					//LL8 170,
 label valve_int_lift(10.92 * units.mm)					//LL8 10.92
 label cam_exh_dur_050(184 * units.deg)					//LL8 184,
 label valve_exh_lift(9.525 * units.mm)					//LL8 9.525
-label cam_lobe_separation(112 * units.deg)				//LL8 112,
-label cam_vtec_lobe_separation(112 * units.deg)
-label int_lobe_center(112 * units.deg)
-label exh_lobe_center(112 * units.deg)
-label cam_advance(0 * units.deg)						//LL8 ???/0
-label cam_exh_vvt_start(-12 * units.deg)
-label cam_exh_vvt_end(-24 * units.deg)
-label cam_inner_base_circle(22 * units.mm)			//LL8 ???/25.4
+label cam_int_lobe_center(112 * units.deg)
+label cam_int_advance(0 * units.deg)
+label cam_exh_lobe_center(112 * units.deg)
+label cam_exh_advance(0 * units.deg)
+label cam_exh_vvt_start(-0 * units.deg)
+label cam_exh_vvt_end(-16 * units.deg)
+label cam_vvt_trans_rpm(5200 * units.rpm)
+label cam_inner_base_circle(25.4 * units.mm)			//LL8 ???/25.4
 
 //exhaust
 label exh_primary_length(225 * units.mm)					//LL8 ???/
 label exh_primary_flow_rate(200)
-label exh_collector_flow_rate(550)
-label exh_collector_dia(63.5 * units.mm)
+label exh_collector_flow_rate(500)
+label exh_collector_dia(57 * units.mm)
 label exh_length_after_collector(1500 * units.mm)
 
 //timing
 label timing_advance(0.0)
-label timing_rpm_0000((1 + timing_advance) * units.deg)
-label timing_rpm_0500((1 + timing_advance) * units.deg)
-label timing_rpm_1000((2 + timing_advance) * units.deg)
+label timing_rpm_0000((5 + timing_advance) * units.deg)
+label timing_rpm_0500((5 + timing_advance) * units.deg)
+label timing_rpm_1000((5 + timing_advance) * units.deg)
 label timing_rpm_1500((5 + timing_advance) * units.deg)
-label timing_rpm_2000((5 + timing_advance) * units.deg)
-label timing_rpm_2500((5 + timing_advance) * units.deg)
-label timing_rpm_3000((5 + timing_advance) * units.deg)
-label timing_rpm_3500((6 + timing_advance) * units.deg)
-label timing_rpm_4000((8 + timing_advance) * units.deg)
-label timing_rpm_4500((11 + timing_advance) * units.deg)
-label timing_rpm_5000((16 + timing_advance) * units.deg)
-label timing_rpm_5500((18 + timing_advance) * units.deg)
-label timing_rpm_6000((20 + timing_advance) * units.deg)
+label timing_rpm_2000((7 + timing_advance) * units.deg)
+label timing_rpm_2500((9 + timing_advance) * units.deg)
+label timing_rpm_3000((11 + timing_advance) * units.deg)
+label timing_rpm_3500((13 + timing_advance) * units.deg)
+label timing_rpm_4000((16 + timing_advance) * units.deg)
+label timing_rpm_4500((18 + timing_advance) * units.deg)
+label timing_rpm_5000((21 + timing_advance) * units.deg)
+label timing_rpm_5500((23 + timing_advance) * units.deg)
+label timing_rpm_6000((24 + timing_advance) * units.deg)
 label timing_rpm_6500((22 + timing_advance) * units.deg)
-label timing_rpm_7000((24 + timing_advance) * units.deg)
-label timing_rpm_7500((26 + timing_advance) * units.deg)
+label timing_rpm_7000((20 + timing_advance) * units.deg)
+label timing_rpm_7500((20 + timing_advance) * units.deg)
 label timing_rpm_8000((15 + timing_advance) * units.deg)
 label timing_rpm_8500((15 + timing_advance) * units.deg)
 label timing_rpm_9000((15 + timing_advance) * units.deg)
@@ -259,7 +259,7 @@ fuel AvGas(
     max_dilution_effect: 10.0
 )
 
-public node i6_153624_vvt {
+public node i6_vvt {
     alias output __out: engine;
 
     engine engine(
@@ -274,8 +274,6 @@ public node i6_153624_vvt {
         noise: 0.253,
         jitter: 0.195
     )
-
-    wires wires()
 
     crankshaft c0(
         throw: crank_stroke / 2,
@@ -321,8 +319,18 @@ public node i6_153624_vvt {
         bore: piston_bore_diameter,
         deck_height: crank_stroke / 2 + rod_length + piston_comp_height
     )
-	
-	TB_plenum_runner_intake intake()
+
+    intake intake(
+        plenum_volume: int_man_plenum_vol,
+        plenum_cross_section_area: int_man_plenum_xsec_area,
+		runner_flow_rate: k_carb(int_man_runner_flow_rate),
+        runner_length: int_man_runner_length,
+        intake_flow_rate: k_carb(int_throttle_cfm),
+        idle_flow_rate: k_carb(idle_cfm),
+        idle_throttle_plate_position: idle_adjust,
+		molecular_afr: tune_afr,
+        velocity_decay: 0.1
+    )
 	
     exhaust_system_parameters es_params(
         outlet_flow_rate: k_carb(exh_collector_flow_rate),
@@ -470,6 +478,7 @@ public node i6_153624_vvt {
 			.connect_wire(wires.wire2, (4.0/6.0) * cycle)
 			.connect_wire(wires.wire4, (5.0/6.0) * cycle)
 	engine.add_ignition_module(ignition_module)
+	wires wires()
 }
 
 private node wires {
@@ -532,14 +541,17 @@ public node honda_vtec_head {
         intake_runner_cross_section_area: intake_runner_cross_section_area,
         exhaust_runner_volume: exhaust_runner_volume,
         exhaust_runner_cross_section_area: exhaust_runner_cross_section_area,
-
         intake_port_flow: intake_flow,
         exhaust_port_flow: exhaust_flow,
         valvetrain: vtec_valvetrain(
             vtec_intake_camshaft: camshaft_set.vtec_intake_cam,
             vtec_exhaust_camshaft: camshaft_set.vtec_exhaust_cam,
             intake_camshaft: camshaft_set.intake_cam,
-            exhaust_camshaft: camshaft_set.exhaust_cam
+            exhaust_camshaft: camshaft_set.exhaust_cam,
+			min_rpm: cam_vvt_trans_rpm,
+			min_speed: 0 * units.mph,
+			manifold_vacuum: 1.0 * units.atm - 5.0 * units.inHg,
+			min_throttle_position: 0.3
         ),
         flip_display: flip_display
     )
@@ -554,14 +566,14 @@ private node honda_vtec_camshaft {
     input vtec_intake_lobe_profile: vtec_lobe_profile;
     input vtec_exhaust_lobe_profile: vtec_lobe_profile;
 
-    input lobe_separation: 114 * units.deg;
-    input intake_lobe_center: lobe_separation;
-    input exhaust_lobe_center: lobe_separation;
-    input vtec_lobe_separation: 110 * units.deg;
-    input vtec_intake_lobe_center: vtec_lobe_separation;
-    input vtec_exhaust_lobe_center: vtec_lobe_separation;   
+    input lobe_separation: (cam_int_lobe_center + cam_exh_lobe_center + cam_exh_vvt_start) / 2;
+    input intake_lobe_center: cam_int_lobe_center;
+    input exhaust_lobe_center: cam_exh_lobe_center + cam_exh_vvt_start;
+    input vtec_lobe_separation: (cam_int_lobe_center + cam_exh_lobe_center + cam_exh_vvt_end ) / 2;
+    input vtec_intake_lobe_center: cam_int_lobe_center;
+    input vtec_exhaust_lobe_center: cam_exh_lobe_center + cam_exh_vvt_end;   
     input advance: 0 * units.deg; 
-    input base_radius: 1.0 * units.inch;
+    input base_radius: cam_inner_base_circle / 2;
 
     output intake_cam: _intake_cam;
     output exhaust_cam: _exhaust_cam;
@@ -612,29 +624,4 @@ private node honda_vtec_camshaft {
 		.add_lobe(rot360 - vtec_exhaust_lobe_center + 5 * rot120)
 		.add_lobe(rot360 - vtec_exhaust_lobe_center + 1 * rot120)
 		.add_lobe(rot360 - vtec_exhaust_lobe_center + 3 * rot120)	
-}
-
-public node TB_plenum_runner_intake {
-    input carburetor_cfm: int_throttle_cfm;
-    input idle_flow_rate_cfm: idle_cfm;
-    input idle_throttle_plate_position: idle_adjust;
-	input plenum_volume: int_man_plenum_vol;
-	input plenum_cross_section_area: int_man_plenum_xsec_area;
-	input runner_flow_rate: k_carb(int_man_runner_flow_rate);
-	input runner_length: int_man_runner_length;
-	input molecular_afr: tune_afr;
-
-    alias output __out: intake;
-
-    intake intake(
-        plenum_volume: plenum_volume,
-        plenum_cross_section_area: plenum_cross_section_area,
-        intake_flow_rate: k_carb(carburetor_cfm),
-        idle_flow_rate: k_carb(idle_flow_rate_cfm),
-        idle_throttle_plate_position: idle_throttle_plate_position,
-        runner_flow_rate: runner_flow_rate,
-        runner_length: int_man_runner_length,
-		molecular_afr: molecular_afr,
-        velocity_decay: 0.1
-    )
 }
