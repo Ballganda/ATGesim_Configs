@@ -4,12 +4,14 @@ units units()
 constants constants()
 impulse_response_library ir_lib()
 
-//This a engine setup file for i6 153624 firing engines
-//I wanted to make a file with all the parameters up top to edit
+//This is an engine setup for i6 153624 firing engines.
+//I wanted to make a file with all the parameters up top to edit.
 //No digging down in the actual code/script to change the values
 //The initial setup of engine is LL8 AKA Vortec 4200 GM 4.2L
 //The Honda vtec code is used to pseudo vvt --> vvtec
-//The model can be set to vtec or pseudo vvt 
+//The model can be set to vtec or pseudo vvt
+//This model is setup to mimic IRL performance with the parameters
+//I could find on the engine. 
 
 //engine_name
 label engine_name("BallGanda_i6_vvtec")					//Name that shows in app
@@ -42,7 +44,7 @@ label rod_length(152 * units.mm)						//LL8 152.00;
 label rod_mass(730 * units.g)							//LL8 730.00;
 label eng_compression_ratio(10.3)						//LL8  10.30;
 label eng_rot_friction_torq(70 * units.Nm)				//LL8  70.00;
-label eng_angle_in_chassis(0 * units.deg)				//LL8 0; Got the BMWs/Supra covered
+label eng_angle_in_chassis(0 * units.deg)				//LL8   0.00; Got the BMWs/Supra covered tho
 label eng_head_flip_display(true)
 
 //timing 												//LL8 unknown home brew tuneup in atgesim
