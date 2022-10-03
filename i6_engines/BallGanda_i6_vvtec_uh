@@ -4,6 +4,9 @@ units units()
 constants constants()
 impulse_response_library ir_lib()
 
+//Added unequal length primary exhaust.
+//Separated vvtec lobe center inputs
+//Moment of inertia, cleanup, minor refactor.
 //This is an engine setup for i6 153624 firing engines.
 //I wanted to make a file with all the parameters up top to edit.
 //No digging down in the actual code/script to change the values
@@ -14,12 +17,12 @@ impulse_response_library ir_lib()
 //I could find on the engine. 
 
 //engine_name
-label engine_name("BallGanda_i6_vvtec")					//Name that shows in app
+label engine_name("BallGanda_i6_vvtec_uh")					//Name that shows in app
 
 label sim_freq(10000)
 
 //idle adjustment
-label idle_adjust(0.9947)
+label idle_adjust(0.994)
 label idle_cfm(0.1)
 
 //fuel options: Runs fuel setup i researched params for. The fuels
@@ -35,7 +38,7 @@ label tune_afr(13.5)									//afr engine runs at WOT
 
 //engine layout
 label crank_stroke(102 * units.mm)						//LL8 102.00;
-label crank_mass(35 * units.kg)							//LL8  35.00;
+label crank_mass(45 * units.kg)							//LL8  35.00;
 label crank_flywheel_mass(13.15 * units.kg)				//LL8  13.15;
 label crank_flywheel_dia(317 * units.mm)
 label piston_bore_diameter(93 * units.mm)				//LL8  93.00;
@@ -49,49 +52,54 @@ label eng_angle_in_chassis(0 * units.deg)				//LL8   0.00; Got the BMWs/Supra co
 label eng_head_flip_display(true)
 
 //timing 												//LL8 unknown home brew tuneup in atgesim
-label timing_advance(5.0)								//I pushed timing around to hit tq/hp targets of oem
-label timing_rpm_0000((-5 + timing_advance) * units.deg)
-label timing_rpm_0500((-5 + timing_advance) * units.deg)
-label timing_rpm_1000((-5 + timing_advance) * units.deg)
-label timing_rpm_1500((3 + timing_advance) * units.deg)
+label timing_advance(0.0)								//I pushed timing around to hit tq/hp targets of oem
+label timing_rpm_0000((0 + timing_advance) * units.deg)
+label timing_rpm_0500((0 + timing_advance) * units.deg)
+label timing_rpm_1000((0 + timing_advance) * units.deg)
+label timing_rpm_1500((0 + timing_advance) * units.deg)
 label timing_rpm_2000((6 + timing_advance) * units.deg)
 label timing_rpm_2500((9 + timing_advance) * units.deg)
-label timing_rpm_3000((11 + timing_advance) * units.deg)
-label timing_rpm_3500((13 + timing_advance) * units.deg)
-label timing_rpm_4000((15 + timing_advance) * units.deg)
-label timing_rpm_4500((17 + timing_advance) * units.deg)
-label timing_rpm_5000((19 + timing_advance) * units.deg)
-label timing_rpm_5500((20 + timing_advance) * units.deg)
-label timing_rpm_6000((21 + timing_advance) * units.deg)
-label timing_rpm_6500((19 + timing_advance) * units.deg)
-label timing_rpm_7000((17 + timing_advance) * units.deg)
-label timing_rpm_7500((17 + timing_advance) * units.deg)
-label timing_rpm_8000((15 + timing_advance) * units.deg)
-label timing_rpm_8500((15 + timing_advance) * units.deg)
-label timing_rpm_9000((15 + timing_advance) * units.deg)
+label timing_rpm_3000((12 + timing_advance) * units.deg)
+label timing_rpm_3500((15 + timing_advance) * units.deg)
+label timing_rpm_4000((18 + timing_advance) * units.deg)
+label timing_rpm_4500((20 + timing_advance) * units.deg)
+label timing_rpm_5000((22 + timing_advance) * units.deg)
+label timing_rpm_5500((25 + timing_advance) * units.deg)
+label timing_rpm_6000((29 + timing_advance) * units.deg)
+label timing_rpm_6500((29 + timing_advance) * units.deg)
+label timing_rpm_7000((29 + timing_advance) * units.deg)
+label timing_rpm_7500((29 + timing_advance) * units.deg)
+label timing_rpm_8000((20 + timing_advance) * units.deg)
+label timing_rpm_8500((20 + timing_advance) * units.deg)
+label timing_rpm_9000((20 + timing_advance) * units.deg)
 
 
 //intake manifold 
 label int_throttle_cfm(920)								//LL8 920;
 label int_man_plenum_vol(0.7 * units.L)					//LL8 0.7;
 label int_man_plenum_xsec_area(100.0 * units.cm2)		//LL8 100;
-label int_man_runner_flow_rate(350)						//LL8 340;
-label int_man_runner_length(125 * units.mm)				//LL8 200;
+label int_man_runner_flow_rate(340)						//LL8 340;
+label int_man_runner_length(200 * units.mm)				//LL8 200;
 
 //camshaft
 label cam_inner_base_circle(25.4 * units.mm)			//LL8 25.4;
+
+label cam_int_advance(0 * units.deg)					//LL8 0;
+label cam_int_lobe_center(112 * units.deg)				//LL8 112;
 label cam_int_dur_050(170 * units.deg)					//LL8 170;
 label valve_int_lift(10.92 * units.mm)					//LL8 10.92;
-label cam_exh_dur_050(184 * units.deg)					//LL8 184;
-label valve_exh_lift(9.525 * units.mm)					//LL8 9.525;
+label cam_int_lobe_center_vvtec(112 * units.deg)
 label cam_int_dur_050_vvtec(170 * units.deg)			//LL8 170;
 label valve_int_lift_vvtec(10.92 * units.mm)			//LL8 10.92;
+
+label cam_exh_advance(0 * units.deg)					//LL8 0;
+label cam_exh_lobe_center(112 * units.deg)				//LL8 112;
+label cam_exh_dur_050(184 * units.deg)					//LL8 184;
+label valve_exh_lift(9.525 * units.mm)					//LL8 9.525;
+label cam_exh_lobe_center_vvtec(112 * units.deg)
 label cam_exh_dur_050_vvtec(184 * units.deg)			//LL8 184;
 label valve_exh_lift_vvtec(9.525 * units.mm)			//LL8 9.525;
-label cam_int_lobe_center(112 * units.deg)				//LL8 112;
-label cam_int_advance(0 * units.deg)					//LL8 0;
-label cam_exh_lobe_center(112 * units.deg)				//LL8 112;
-label cam_exh_advance(0 * units.deg)					//LL8 0;
+
 label cam_int_vvtec_start(0 * units.deg)				//LL8 0;
 label cam_int_vvtec_end(0 * units.deg)					//LL8 0;
 label cam_exh_vvtec_start(-0 * units.deg)				//LL8 -8;
@@ -102,7 +110,7 @@ label cam_vvtec_trans_rpm(3500 * units.rpm)				//LL8 3500;
 label head_int_runner_vol(188.0 * units.cc)				//LL8 188.00
 label head_int_runner_xsec_area(24.40 * units.cm2)		//LL8  24.40
 label head_exh_runner_vol(83 * units.cc)				//LL8  83.00
-label head_exh_runner_xsec_area(18.00 * units.cm2)			//LL8 ???.00
+label head_exh_runner_xsec_area(18.00 * units.cm2)		//LL8  18.00
 //head flow
 //intake
 label int_flow_scalar(1.0)
@@ -134,19 +142,17 @@ label exh_flow_lift_11(159.3 * exh_flow_scalar)
 label exh_flow_lift_12(162.3 * exh_flow_scalar)
 
 //exhaust
-//label exh_primary_length(250 * units.mm)				//LL8 250;
-label exh_c1_primary_length(250 * units.mm)
-label exh_c2_primary_length(200 * units.mm)
-label exh_c3_primary_length(150 * units.mm)
-label exh_c4_primary_length(150 * units.mm)
-label exh_c5_primary_length(200 * units.mm)
-label exh_c6_primary_length(250 * units.mm)
-
+label exh_c1_primary_length(350 * units.mm)
+label exh_c2_primary_length(300 * units.mm)
+label exh_c3_primary_length(250 * units.mm)
+label exh_c4_primary_length(250 * units.mm)
+label exh_c5_primary_length(300 * units.mm)
+label exh_c6_primary_length(350 * units.mm)
 label exh_primary_flow_rate(250)						//LL8 250;
-label exh_collector_flow_rate(500)						//LL8 500;
-label exh_collector_dia(63 * units.mm)					//LL8 63;
-label exh_length_after_collector(4000 * units.mm)		//LL8 4000;
-//label exh_type(real_engine_0)							//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
+label exh_collector_flow_rate(700)						//LL8 700;
+label exh_collector_dia(70 * units.mm)					//LL8 70;
+label exh_length_after_collector(500 * units.mm)		//LL8 4000;
+label exh_type(ir_lib.real_engine_0)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
 
 //rev limits				
 label redline_engine(6300 * units.rpm)					//LL8 6300;
@@ -166,8 +172,7 @@ label start_rpm(400 * units.rpm)
 label eng_snd_hf_gain(0.002)
 label eng_snd_noise(0.2)
 label eng_snd_jitter(0.5) 
-label exh0_snd_audio_volume(0.4)
-label exh1_snd_audio_volume(0.7)
+label exh_snd_audio_volume(0.4)
 
 //Advanced
 label crank_position_x(0.0 * units.mm)
@@ -176,16 +181,15 @@ label crank_moment_of_inertia(
         disk_moment_of_inertia(mass: crank_mass, radius: crank_stroke / 2)
     )
 label flywheel_moment(
-        disk_moment_of_inertia(mass: crank_flywheel_mass, radius: crank_flywheel_dia /2 ) * 2
+        disk_moment_of_inertia(mass: crank_flywheel_mass, radius: crank_flywheel_dia / 2)
     )
-label other_moment( // Moment from cams, pulleys, etc [estimated]
+label other_moment( 									// Moment from cams, pulleys, etc [estimated]
         disk_moment_of_inertia(mass: 10 * units.kg, radius: 6.0 * units.cm)
     )
 label rod_center_of_mass(0.0)
 label piston_blowby(0.1)
-label int_velocity_decay(1.0)
-label exh_velocity_decay(1.0)
-
+label int_velocity_decay(0.5)
+label exh_velocity_decay(0.5)
 
 //calculations
 label cycle(2 * 360 * units.deg)
@@ -227,7 +231,7 @@ fuel pumpus93gas(
     max_dilution_effect: 10.0
 )
 
-public node BallGanda_i6_vvtec {
+public node BallGanda_i6_vvtec_uh {
     alias output __out: engine;
 
     engine engine(
@@ -248,26 +252,27 @@ public node BallGanda_i6_vvtec {
         flywheel_mass: crank_flywheel_mass,
         mass: crank_mass,
         friction_torque: eng_rot_friction_torq,
-        moment_of_inertia: crank_moment_of_inertia,
+        moment_of_inertia:
+			crank_moment_of_inertia + flywheel_moment + other_moment,
         position_x: crank_position_x,
         position_y: crank_position_y,
         tdc: 120.0 * units.deg + eng_angle_in_chassis
     )
 
-	rod_journal rj0(angle: 0.0)
-    rod_journal rj1(angle: 120*units.deg)
-    rod_journal rj2(angle: 240*units.deg)
+	rod_journal rj1(angle: 0.0)
+    rod_journal rj2(angle: 120*units.deg)
     rod_journal rj3(angle: 240*units.deg)
-    rod_journal rj4(angle: 120*units.deg)
-    rod_journal rj5(angle: 0*units.deg)
+    rod_journal rj4(angle: 240*units.deg)
+    rod_journal rj5(angle: 120*units.deg)
+    rod_journal rj6(angle: 0*units.deg)
 	
     c0
-        .add_rod_journal(rj0)
         .add_rod_journal(rj1)
         .add_rod_journal(rj2)
         .add_rod_journal(rj3)
         .add_rod_journal(rj4)
         .add_rod_journal(rj5)
+        .add_rod_journal(rj6)
 
     piston_parameters piston_params(
         mass: piston_mass_wpin,
@@ -306,76 +311,73 @@ public node BallGanda_i6_vvtec {
 	
     exhaust_system_parameters es_params(
         outlet_flow_rate: k_carb(exh_collector_flow_rate),
-        primary_tube_length: 250 * units.mm,
+        //primary_tube_length: 250 * units.mm,
         primary_flow_rate: k_carb(exh_primary_flow_rate),
         velocity_decay: exh_velocity_decay,
-		collector_cross_section_area: circle_area(exh_collector_dia / 2)
-        //volume: exh_volume
+		collector_cross_section_area: circle_area(exh_collector_dia / 2),
+        volume: exh_volume
     )
 
-    exhaust_system exhaust0(
+    exhaust_system exhaust1(
 		es_params,
-		audio_volume: exh0_snd_audio_volume,
-		impulse_response: ir_lib.real_engine_0,
+		audio_volume: exh_snd_audio_volume,
+		impulse_response: exh_type,
 		length: exh_length_after_collector
 	)
-    
-	
-	//exhaust_system exhaust1(es_params, audio_volume: exh1_snd_audio_volume, impulse_response: ir_lib.default_0)
  
     cylinder_bank b0(bank_params, angle: eng_angle_in_chassis)
     b0
         .add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj0,
+            rod_journal: rj1,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c1_primary_length,
             ignition_wire: wires.wire1
         )
 		.add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj1,
+            rod_journal: rj2,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c2_primary_length,
             ignition_wire: wires.wire2
         )
 		.add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj2,
+            rod_journal: rj3,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c3_primary_length,
             ignition_wire: wires.wire3
         )
 		.add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj3,
+            rod_journal: rj4,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c4_primary_length,
             ignition_wire: wires.wire4
         )
 		.add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj4,
+            rod_journal: rj5,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c5_primary_length,
             ignition_wire: wires.wire5
         )
 		.add_cylinder(
             piston: piston(piston_params),
             connecting_rod: connecting_rod(cr_params),
-            rod_journal: rj5,
+            rod_journal: rj6,
             intake: intake,
-            exhaust_system: exhaust0,
+            exhaust_system: exhaust1,
 			primary_length: exh_c6_primary_length,
             ignition_wire: wires.wire6
         )
@@ -413,7 +415,7 @@ public node BallGanda_i6_vvtec {
         steps: 100
     )
 
-    honda_vtec_camshaft camshaft(
+    vvtec_camshaft camshaft(
         lobe_profile: "N/A",
         vtec_lobe_profile: "N/A",
         intake_lobe_profile: intake_lobe,
@@ -542,7 +544,7 @@ public node honda_vtec_head {
     )
 }
 
-private node honda_vtec_camshaft {
+private node vvtec_camshaft {
     input lobe_profile;
     input intake_lobe_profile: lobe_profile;
     input exhaust_lobe_profile: lobe_profile;
@@ -554,10 +556,10 @@ private node honda_vtec_camshaft {
     input lobe_separation: (cam_int_lobe_center - cam_int_advance - cam_int_vvtec_start + cam_exh_lobe_center + cam_exh_advance + cam_exh_vvtec_start) / 2;
     input intake_lobe_center: cam_int_lobe_center - cam_int_vvtec_start - cam_int_advance;
     input exhaust_lobe_center: cam_exh_lobe_center + cam_exh_vvtec_start + cam_exh_advance;
-    input vtec_lobe_separation: (cam_int_lobe_center - cam_int_advance - cam_int_vvtec_end + cam_exh_lobe_center + cam_exh_advance + cam_exh_vvtec_end ) / 2;
+    input vtec_lobe_separation: (cam_int_lobe_center_vvtec - cam_int_advance - cam_int_vvtec_end + cam_exh_lobe_center_vvtec + cam_exh_advance + cam_exh_vvtec_end ) / 2;
     input vtec_intake_lobe_center: cam_int_lobe_center - cam_int_vvtec_end - cam_int_advance;
     input vtec_exhaust_lobe_center: cam_exh_lobe_center + cam_exh_vvtec_end + cam_exh_advance;   
-    input advance: 0 * units.deg; 
+    input advance: 0 * units.deg; //advance is in the lobe center calc
     input base_radius: cam_inner_base_circle / 2;
 
     output intake_cam: _intake_cam;
