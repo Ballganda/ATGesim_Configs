@@ -1,0 +1,157 @@
+import "engine_sim.mr"
+
+units units()
+constants constants()
+
+label e36m3sedan_mass(1536 * units.kg)
+public node e36m3sedan_vehicle {
+    alias output __out:
+        vehicle(
+            mass: e36m3sedan_mass,
+            drag_coefficient: 0.32,
+            cross_sectional_area: 1.96 * units.m2,
+            diff_ratio: 3.23,
+            tire_radius: 628 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * e36m3sedan_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+
+public node e36m3sedan_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 500 * units.lb_ft
+        )
+        .add_gear(4.2)
+        .add_gear(2.49)
+        .add_gear(1.66)
+        .add_gear(1.24)
+        .add_gear(1.0);
+}
+
+//set_vehicle(impreza())
+// label impreza_mass(1600 * units.kg)
+// private node impreza {
+    // alias output __out:
+        // vehicle(
+            // mass: car_mass,
+            // drag_coefficient: 0.3,
+            // cross_sectional_area: (72 * units.inch) * (56 * units.inch),
+            // diff_ratio: 3.9,
+            // tire_radius: 10 * units.inch,
+            // rolling_resistance: 0.015 * car_mass * 9.81 
+        // );
+// }   
+//set_transmission(impreza_transmission())
+// private node impreza_transmission {
+    // alias output __out:
+        // transmission(
+            // max_clutch_torque: 300 * units.lb_ft
+        // )
+        // .add_gear(3.636)
+        // .add_gear(2.375)
+        // .add_gear(1.761)
+        // .add_gear(1.346)
+        // .add_gear(0.971)
+        // .add_gear(0.756);
+// }
+
+//set_vehicle(integra_type_r())
+// private node integra_type_r {
+    // alias output __out:
+        // vehicle(
+            // mass: 2400 * units.lb,
+            // drag_coefficient: 0.2,
+            // cross_sectional_area: (66 * units.inch) * (50 * units.inch),
+            // diff_ratio: 3.55,
+            // tire_radius: 10 * units.inch,
+            // rolling_resistance: 300 * units.N
+        // );
+// }
+//set_transmission(integra_type_r_transmission())
+// private node integra_type_r_transmission {
+    // alias output __out:
+        // transmission(
+            // max_clutch_torque: 300 * units.lb_ft
+        // )
+        // .add_gear(3.23)
+        // .add_gear(2.105)
+        // .add_gear(1.458)
+        // .add_gear(1.107)
+        // .add_gear(0.848);
+// }
+
+// private node lfa_vehicle {
+    // alias output __out:
+        // vehicle(
+            // mass: 1614 * units.kg,
+            // drag_coefficient: 0.3,
+            // cross_sectional_area: (72 * units.inch) * (50 * units.inch),
+            // diff_ratio: 3.42,
+            // tire_radius: 10 * units.inch,
+            // rolling_resistance: 200 * units.N
+        // );
+// }
+
+// private node lfa_transmission {
+    // alias output __out:
+        // transmission(
+            // max_clutch_torque: 500 * units.lb_ft
+        // )
+        // .add_gear(3.23)
+        // .add_gear(2.19)
+        // .add_gear(1.61)
+        // .add_gear(1.23)
+        // .add_gear(0.97)
+        // .add_gear(0.8);
+// }
+
+// private node corvette {
+    // alias output __out:
+        // vehicle(
+            // mass: 1614 * units.kg,
+            // drag_coefficient: 0.3,
+            // cross_sectional_area: (72 * units.inch) * (50 * units.inch),
+            // diff_ratio: 3.42,
+            // tire_radius: 10 * units.inch,
+            // rolling_resistance: 200 * units.N
+        // );
+// }
+
+// private node corvette_transmission {
+    // alias output __out:
+        // transmission(
+            // max_clutch_torque: 500 * units.lb_ft
+        // )
+        // .add_gear(2.97)
+        // .add_gear(2.07)
+        // .add_gear(1.43)
+        // .add_gear(1.00)
+        // .add_gear(0.71)
+        // .add_gear(0.57);
+// }
+
+// private node supra_vehicle {
+    // alias output __out:
+        // vehicle(
+            // mass: 3400 * units.lb,
+            // drag_coefficient: 0.4,
+            // cross_sectional_area: (66 * units.inch) * (50 * units.inch),
+            // diff_ratio: 3.15,
+            // tire_radius: 10 * units.inch,
+            // rolling_resistance: 500 * units.N
+        // );
+// }
+
+// private node supra_transmission {
+    // alias output __out:
+        // transmission(
+            // max_clutch_torque: 500 * units.lb_ft
+        // )
+        // .add_gear(5.25)
+        // .add_gear(3.36)
+        // .add_gear(2.17)
+        // .add_gear(1.72)
+        // .add_gear(1.32)
+        // .add_gear(1.0);
+// }
