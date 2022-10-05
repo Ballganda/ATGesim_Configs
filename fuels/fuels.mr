@@ -2,6 +2,37 @@
 // pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
 // afr12.5 14.7 12.5 14.7    11.9 14.1     11.9 14.1     6.98 9.76   6.429 9.0    34.3 34.3 1.7 1.7
 
+// private node turbulence_to_flame_speed_ratio_default {
+    // alias output __out:
+        // function(5.0)
+            // .add_sample(0.0, 3.0)
+            // .add_sample(5.0, 1.5 * 5.0)
+            // .add_sample(10.0, 1.5 * 10.0)
+            // .add_sample(15.0, 1.5 * 15.0)
+            // .add_sample(20.0, 1.5 * 20.0)
+            // .add_sample(25.0, 1.5 * 25.0)
+            // .add_sample(30.0, 1.5 * 30.0)
+            // .add_sample(35.0, 1.5 * 35.0)
+            // .add_sample(40.0, 1.5 * 40.0)
+            // .add_sample(45.0, 1.5 * 45.0);
+// }
+
+// public node fuel => __engine_sim__fuel {
+    // input name [string]: "Gasoline [Default]";
+    // input molecular_mass [float]: 100 * units.g;
+    // input energy_density [float]: 48.1 * units.kJ / units.g;
+    // input density [float]: 0.755 * units.kg / units.L;
+    // input molecular_afr [float]: 25 / 2.0;
+    // input turbulence_to_flame_speed_ratio [function]:
+        // turbulence_to_flame_speed_ratio_default();
+    // input max_burning_efficiency [float]: 0.8;
+    // input burning_efficiency_randomness [float]: 0.5;
+    // input low_efficiency_attenuation [float]: 0.6;
+    // input max_turbulence_effect [float]: 2.0;
+    // input max_dilution_effect [float]: 10.0;
+    // alias output __out [fuel_channel];
+// }
+
 fuel pump_us87e10(
     name: "pump_us87e10",
     molecular_mass: 85.6 * units.g,
