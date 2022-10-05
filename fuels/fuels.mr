@@ -1,0 +1,81 @@
+// fuel options:Fuels are not working other than pump gas without ethanol
+// pumpus87gas, pumpus93gas, pump_us87e10, pump_us93e10, pump_use85, pump_use100, hydrogen, nitromethane
+// afr12.5 14.7 12.5 14.7    11.9 14.1     11.9 14.1     6.98 9.76   6.429 9.0    34.3 34.3 1.7 1.7
+
+fuel pump_us87e10(
+    name: "pump_us87e10",
+    molecular_mass: 85.6 * units.g,
+    energy_density: 42.6 * units.kJ / units.g,
+    density: 0.736 * units.kg / units.L,
+    molecular_afr: 11.9,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_us93e10(
+    name: "pump_us93e10",
+    molecular_mass: 85.6 * units.g,
+    energy_density: 42.6 * units.kJ / units.g,
+    density: 0.736 * units.kg / units.L,
+    molecular_afr: 11.9,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_use85(
+    name: "pump_use85",
+    molecular_mass: 52.6 * units.g,
+    energy_density: 32.6 * units.kJ / units.g,
+    density: 0.784 * units.kg / units.L,
+    molecular_afr: 6.98,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel pump_use100(
+    name: "pump_use100",
+    molecular_mass: 46.1 * units.g,
+    energy_density: 29.8 * units.kJ / units.g,
+    density: 0.794 * units.kg / units.L,
+    molecular_afr: 9.00,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel hydrogen(
+    name: "hydrogen",
+    molecular_mass: 2.02 * units.g,
+    energy_density: 120.0 * units.kJ / units.g,
+    density: 0.0696 * units.kg / units.L,
+    molecular_afr: 34.3,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
+
+fuel nitromethane(
+    name: "nitromethane",
+    molecular_mass: 61.04 * units.g,
+    energy_density: 11.3 * units.kJ / units.g,
+    density: 1.14 * units.kg / units.L,
+    molecular_afr: 1.7,
+    max_burning_efficiency: 0.85,
+    burning_efficiency_randomness: 0.5,
+    low_efficiency_attenuation: 0.6,
+    max_turbulence_effect: 2.0,
+    max_dilution_effect: 10.0
+)
