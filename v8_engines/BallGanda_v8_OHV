@@ -7,12 +7,12 @@ impulse_response_library ir_lib()
 //
 
 //engine_name
-label engine_name("BallGanda_LSx_BYOE")					//Name that shows in app
+label engine_name("BallGanda_LSx_BYOE") //Name that shows in app
 
-label sim_freq(10000)
+label sim_freq(3000)
 
 //idle adjustment
-label idle_adjust(0.994)
+label idle_adjust(0.99)
 label idle_cfm(0.1)
 
 /*fuel options: Runs fuel setup i researched params for. The fuels
@@ -23,139 +23,144 @@ are under in "fuels setup". To run default sim fuel use
 //      AFRs: 12.5 14.7  ;  12.5 14.7 ; 12.5 14.7 ; 
 
 //fuel setting
-label type_of_fuel(pumpus93gas)							//Fuel type in use
-label tune_afr(13.5)									//afr engine runs at WOT
+label type_of_fuel(pumpus93gas)	//Fuel type in use
+label tune_afr(13.5) //afr engine runs at WOT
 
 //engine layout
-label crank_stroke(4.0 * units.inch)						//LS7 
-label crank_mass(45 * units.kg)							//LS7  
-label crank_flywheel_mass(13.15 * units.kg)				//LS7  
-label crank_flywheel_dia(317 * units.mm)
-label piston_bore_diameter(4.125 * units.inch)				//LS7  
-label piston_comp_height(27.94 * units.mm)				//LS7  
-label piston_mass_wpin(574 * units.g)					//LS7 
-label rod_length(152 * units.mm)						//LS7 
-label rod_mass(730 * units.g)							//LS7 
-label eng_compression_ratio(6.3)						//LS7  
-label eng_rot_friction_torq(70 * units.Nm)				//LS7  
-label eng_angle_in_chassis(0 * units.deg)				//LS7   0.00;
+label crank_stroke(4.0 * units.inch)//LS7 
+label crank_mass(57 * units.lb)//LS7  
+label crank_flywheel_mass(26.5 * units.lb)//LS7  
+label crank_flywheel_dia(14 * units.inch)//LS7
+label piston_bore_diameter(4.125 * units.inch)//LS7  
+label piston_comp_height(1.175 * units.inch)//LS7  
+label piston_mass_wpin(482 * units.g)//LS7 
+label rod_length(6.067 * units.inch)//LS7 
+label rod_mass(464 * units.g)//LS7 
+label eng_compression_ratio(12.0)//LS7  
+label eng_rot_friction_torq(64 * units.lb_ft)//LS7  
+label eng_v_angle(90 * units.deg)//LS7
+label eng_angle_in_chassis(0 * units.deg)//LS7
 label eng_head0_flip_display(false)
 label eng_head1_flip_display(true)
-label eng_v_angle(90 * units.deg)
 
-//timing 												//LS7 
+
+//timing 							 
 label timing_advance(0.0)								
 label timing_rpm_0000((0 + timing_advance) * units.deg)
 label timing_rpm_0500((0 + timing_advance) * units.deg)
-label timing_rpm_1000((0 + timing_advance) * units.deg)
-label timing_rpm_1500((0 + timing_advance) * units.deg)
-label timing_rpm_2000((6 + timing_advance) * units.deg)
-label timing_rpm_2500((9 + timing_advance) * units.deg)
-label timing_rpm_3000((12 + timing_advance) * units.deg)
-label timing_rpm_3500((15 + timing_advance) * units.deg)
-label timing_rpm_4000((18 + timing_advance) * units.deg)
-label timing_rpm_4500((20 + timing_advance) * units.deg)
-label timing_rpm_5000((22 + timing_advance) * units.deg)
-label timing_rpm_5500((25 + timing_advance) * units.deg)
-label timing_rpm_6000((29 + timing_advance) * units.deg)
-label timing_rpm_6500((29 + timing_advance) * units.deg)
-label timing_rpm_7000((29 + timing_advance) * units.deg)
-label timing_rpm_7500((29 + timing_advance) * units.deg)
-label timing_rpm_8000((20 + timing_advance) * units.deg)
-label timing_rpm_8500((20 + timing_advance) * units.deg)
-label timing_rpm_9000((20 + timing_advance) * units.deg)
+label timing_rpm_1000((20 + timing_advance) * units.deg)
+label timing_rpm_1500((20 + timing_advance) * units.deg)
+label timing_rpm_2000((25 + timing_advance) * units.deg)
+label timing_rpm_2500((30 + timing_advance) * units.deg)
+label timing_rpm_3000((34 + timing_advance) * units.deg)
+label timing_rpm_3500((38 + timing_advance) * units.deg)
+label timing_rpm_4000((44 + timing_advance) * units.deg)
+label timing_rpm_4500((50 + timing_advance) * units.deg)
+label timing_rpm_5000((56 + timing_advance) * units.deg)
+label timing_rpm_5500((62 + timing_advance) * units.deg)
+label timing_rpm_6000((69 + timing_advance) * units.deg)
+label timing_rpm_6500((71 + timing_advance) * units.deg)
+label timing_rpm_7000((73 + timing_advance) * units.deg)
+label timing_rpm_7500((75 + timing_advance) * units.deg)
+label timing_rpm_8000((77 + timing_advance) * units.deg)
+label timing_rpm_8500((79 + timing_advance) * units.deg)
+label timing_rpm_9000((81 + timing_advance) * units.deg)
 
 
 //intake manifold 
-label int_throttle_cfm(920)								//LS7 
-label int_man_plenum_vol(0.7 * units.L)					//LS7 
-label int_man_plenum_xsec_area(100.0 * units.cm2)		//LS7 
-label int_man_runner_flow_rate(340)						//LS7 
-label int_man_runner_length(200 * units.mm)				//LS7 
+label int_throttle_cfm(1170) //LS7 90mm TB 1170CFM
+label int_man_plenum_vol(5000 * units.cc)//LS7 estimate 5000cc not including runner volume
+label int_man_plenum_xsec_area(50 * units.cm2) 
+label int_man_runner_flow_rate(800)						 
+label int_man_runner_length(7.5 * units.inch)//LS7 
 
 //camshaft
-label cam_inner_base_circle(38.1 * units.mm)			//LS7 
+label cam_inner_base_circle(1.5 * units.inch)			//LS7 
 
-label cam_advance(0 * units.deg)					//LS7 
-
-label cam_int_lobe_center(112 * units.deg)				//LS7 
-label cam_int_dur_050(170 * units.deg)					//LS7 
-label valve_int_lift(10.92 * units.mm)					//LS7 
-
-label cam_exh_lobe_center(112 * units.deg)				//LS7 
-label cam_exh_dur_050(184 * units.deg)					//LS7 
-label valve_exh_lift(9.525 * units.mm)					//LS7
-
+label cam_advance(-3 * units.deg)//LS7 
+label cam_int_lobe_center(120.5 * units.deg)//LS7
+label cam_exh_lobe_center(120.5 * units.deg)//LS7 
+label cam_int_dur_050(210 * units.deg)//LS7
+label cam_exh_dur_050(230 * units.deg)//LS7 
+label valve_int_lift_advertised(0.593 * units.inch)//LS7
+label valve_exh_lift_advertised(0.589 * units.inch)//LS7
+label valve_advertised_lift_rocker_ratio(1.8)//LS7
+label valve_int_rocker_ratio_sim(1.8)//LS7
+label valve_exh_rocker_ratio_sim(1.8)//LS7
 
 //head
-label head_int_runner_vol(150.0 * units.cc)				//LS7 
-label head_int_runner_xsec_area(2.2 * 2.2 * units.inch * units.inch)		//LS7 
-label head_exh_runner_vol(90 * units.cc)				//LS7  
-label head_exh_runner_xsec_area(1.75 * 1.75 * units.inch * units.inch)		//LS7  
+label head_int_runner_length(5.628 * units.inch) //LS7
+label head_int_runner_vol(259.0 * units.cc)				//LS7 
+label head_int_valve_dia(2.2 * units.inch)
+label head_int_valve2runner_area_ratio(1.7)
+label head_exh_runner_length(3.328 * units.inch)
+label head_exh_runner_vol(86 * units.cc)
+label head_exh_valve_dia(1.61 * units.inch)			//LS7
+label head_exh_valve2runner_area_ratio(1.7)
+
 //head flow
 //intake
 label int_flow_scalar(1.0)
-label int_flow_lift_01_050(12.2 * int_flow_scalar)			//LS7 
-label int_flow_lift_02_100(54.9 * int_flow_scalar)
-label int_flow_lift_03_150(94.2 * int_flow_scalar)
-label int_flow_lift_04_200(129.9 * int_flow_scalar)
-label int_flow_lift_05_250(162.1 * int_flow_scalar)
-label int_flow_lift_06_300(190.7 * int_flow_scalar)
-label int_flow_lift_07_350(215.8 * int_flow_scalar)
-label int_flow_lift_08_400(237.4 * int_flow_scalar)
-label int_flow_lift_09_450(255.4 * int_flow_scalar)
-label int_flow_lift_10_500(269.9 * int_flow_scalar)
-label int_flow_lift_11_550(280.8 * int_flow_scalar)
-label int_flow_lift_12_600(288.2 * int_flow_scalar)
-label int_flow_lift_13_650(288.2 * int_flow_scalar)
-label int_flow_lift_14_700(288.2 * int_flow_scalar)
-label int_flow_lift_15_750(288.2 * int_flow_scalar)
+label int_flow_lift_01_050(32 * int_flow_scalar)			//LS7 
+label int_flow_lift_02_100(66.2 * int_flow_scalar)
+label int_flow_lift_03_150(109 * int_flow_scalar)
+label int_flow_lift_04_200(151 * int_flow_scalar)
+label int_flow_lift_05_250(186 * int_flow_scalar)
+label int_flow_lift_06_300(215 * int_flow_scalar)
+label int_flow_lift_07_350(237 * int_flow_scalar)
+label int_flow_lift_08_400(264 * int_flow_scalar)
+label int_flow_lift_09_450(290 * int_flow_scalar)
+label int_flow_lift_10_500(302 * int_flow_scalar)
+label int_flow_lift_11_550(317 * int_flow_scalar)
+label int_flow_lift_12_600(332 * int_flow_scalar)
+label int_flow_lift_13_650(350 * int_flow_scalar)
+label int_flow_lift_14_700(359 * int_flow_scalar)
+label int_flow_lift_15_750(261 * int_flow_scalar)
 //exhaust
 label exh_flow_scalar(1.0)
-label exh_flow_lift_01_050(12.9 * exh_flow_scalar)			//LS7
-label exh_flow_lift_02_100(71.0 * exh_flow_scalar)
-label exh_flow_lift_03_150(145.5 * exh_flow_scalar)
-label exh_flow_lift_04_200(132.6 * exh_flow_scalar)
-label exh_flow_lift_05_250(145.5 * exh_flow_scalar)
-label exh_flow_lift_06_300(151.7 * exh_flow_scalar)
-label exh_flow_lift_07_350(153.9 * exh_flow_scalar)
-label exh_flow_lift_08_400(154.6 * exh_flow_scalar)
-label exh_flow_lift_09_450(155.3 * exh_flow_scalar)
-label exh_flow_lift_10_500(156.8 * exh_flow_scalar)
-label exh_flow_lift_11_550(159.3 * exh_flow_scalar)
-label exh_flow_lift_12_600(162.3 * exh_flow_scalar)
-label exh_flow_lift_13_650(162.3 * exh_flow_scalar)
-label exh_flow_lift_14_700(162.3 * exh_flow_scalar)
-label exh_flow_lift_15_750(162.3 * exh_flow_scalar)
+label exh_flow_lift_01_050(21.5 * exh_flow_scalar)			//LS7
+label exh_flow_lift_02_100(47.3 * exh_flow_scalar)
+label exh_flow_lift_03_150(81.5 * exh_flow_scalar)
+label exh_flow_lift_04_200(111 * exh_flow_scalar)
+label exh_flow_lift_05_250(140 * exh_flow_scalar)
+label exh_flow_lift_06_300(167 * exh_flow_scalar)
+label exh_flow_lift_07_350(195 * exh_flow_scalar)
+label exh_flow_lift_08_400(227 * exh_flow_scalar)
+label exh_flow_lift_09_450(243 * exh_flow_scalar)
+label exh_flow_lift_10_500(253 * exh_flow_scalar)
+label exh_flow_lift_11_550(259 * exh_flow_scalar)
+label exh_flow_lift_12_600(264 * exh_flow_scalar)
+label exh_flow_lift_13_650(267 * exh_flow_scalar)
+label exh_flow_lift_14_700(270 * exh_flow_scalar)
+label exh_flow_lift_15_750(272 * exh_flow_scalar)
 
 //exhaust
-label exh_c1_primary_length(30 * units.inch)
-label exh_c2_primary_length(30 * units.inch)
-label exh_c3_primary_length(30 * units.inch)
-label exh_c4_primary_length(30 * units.inch)
-label exh_c5_primary_length(30 * units.inch)
-label exh_c6_primary_length(30 * units.inch)
-label exh_c7_primary_length(30 * units.inch)
-label exh_c8_primary_length(30 * units.inch)
-label exh_primary_flow_rate(275)						//LS7 
-label exh_collector_flow_rate(1000)						//LS7 
-label exh_collector_dia(3.5 * units.inch)					//LS7 
-label exh_length_after_collector(15 * units.inch)		//LS7 
+label exh_c1_primary_length(32 * units.inch)
+label exh_c2_primary_length(32 * units.inch)
+label exh_c3_primary_length(32 * units.inch)
+label exh_c4_primary_length(32 * units.inch)
+label exh_c5_primary_length(32 * units.inch)
+label exh_c6_primary_length(32 * units.inch)
+label exh_c7_primary_length(32 * units.inch)
+label exh_c8_primary_length(32 * units.inch)
+label exh_primary_dia(1.875) //in inches. not using units because this is passed to cfm trendline equation
+label exh_collector_dia(3.0) //in inches. not using units because this is passed to cfm trendline equation
+label exh_length_after_collector(15 * units.inch) 
 label exh_type(ir_lib.real_engine_0)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
 
 //rev limits				
-label redline_engine(6300 * units.rpm)					//LS7
-label rev_limit_cutout(6800 * units.rpm)				//LS7 
+label redline_engine(7200 * units.rpm)					//LS7
+label rev_limit_cutout(7600 * units.rpm)				//LS7 
 label rev_cut_duration(0.1)								//LS7 
-label rev_limit_ignition(6800 * units.rpm)
+label rev_limit_ignition(8000 * units.rpm)
 
 //starter
-label start_torque(500 * units.lb_ft)
+label start_torque(600 * units.lb_ft)
 label start_rpm(999 * units.rpm)
 
-//###########################################################
-//################END OF TUNING INPUTS#######################
-//###########################################################
+/*###########################################################//
+//################END OF TUNING INPUTS#######################//
+//###########################################################*/
 
 //Sound
 label eng_snd_hf_gain(0.002)
@@ -182,10 +187,29 @@ label exh_velocity_decay(0.5)
 label cam_steps(256)
 
 //calculations
-label cycle(2 * 360 * units.deg)
+float cycle(2 * 360 * units.deg)
 float cylinder_vol(constants.pi * (piston_bore_diameter / 2) * (piston_bore_diameter / 2) * crank_stroke)
 float comb_vol_by_CR(cylinder_vol / (eng_compression_ratio - 1.0))
-float exh_volume(exh_length_after_collector * circle_area(exh_collector_dia / 2))
+float exh_volume(exh_length_after_collector * circle_area(exh_collector_dia / 2) * units.inch)
+float valve_int_lift(valve_int_lift_advertised / valve_advertised_lift_rocker_ratio * valve_int_rocker_ratio_sim)					//LS7 
+float valve_exh_lift(valve_exh_lift_advertised / valve_advertised_lift_rocker_ratio * valve_exh_rocker_ratio_sim)					//LS7
+float head_int_runner_xsec_area(head_int_valve2runner_area_ratio * circle_area(head_int_valve_dia / 2))
+float head_exh_runner_xsec_area(head_exh_valve2runner_area_ratio * circle_area(head_exh_valve_dia / 2))
+float total_int_runner_length(head_int_runner_length + int_man_runner_length)
+float total_exh_c1_primary_length(exh_c1_primary_length + head_exh_runner_length)
+float total_exh_c2_primary_length(exh_c2_primary_length + head_exh_runner_length)
+float total_exh_c3_primary_length(exh_c3_primary_length + head_exh_runner_length)
+float total_exh_c4_primary_length(exh_c4_primary_length + head_exh_runner_length)
+float total_exh_c5_primary_length(exh_c5_primary_length + head_exh_runner_length)
+float total_exh_c6_primary_length(exh_c6_primary_length + head_exh_runner_length)
+float total_exh_c7_primary_length(exh_c7_primary_length + head_exh_runner_length)
+float total_exh_c8_primary_length(exh_c8_primary_length + head_exh_runner_length)
+float exh_primary_flow_rate(
+	-17.275*exh_primary_dia*exh_primary_dia*exh_primary_dia+189.197*exh_primary_dia*exh_primary_dia+-159.007*exh_primary_dia+10
+)
+float exh_collector_flow_rate(
+	-17.275*exh_collector_dia*exh_collector_dia*exh_collector_dia+189.197*exh_collector_dia*exh_collector_dia+-159.007*exh_collector_dia+10
+)
 
 //fuels setup
 //pumpus87gas, pumpus93gas
@@ -282,7 +306,7 @@ public node BallGanda_LSx_BYOE {
         plenum_volume: int_man_plenum_vol,
         plenum_cross_section_area: int_man_plenum_xsec_area,
 		runner_flow_rate: k_carb(int_man_runner_flow_rate),
-        runner_length: int_man_runner_length,
+        runner_length: total_int_runner_length,
         intake_flow_rate: k_carb(int_throttle_cfm),
         idle_flow_rate: k_carb(idle_cfm),
         idle_throttle_plate_position: idle_adjust,
@@ -311,7 +335,7 @@ public node BallGanda_LSx_BYOE {
         outlet_flow_rate: k_carb(exh_collector_flow_rate),
         primary_flow_rate: k_carb(exh_primary_flow_rate),
         velocity_decay: exh_velocity_decay,
-		collector_cross_section_area: circle_area(exh_collector_dia / 2),
+		collector_cross_section_area: circle_area(exh_collector_dia / 2 * units.inch),
         volume: exh_volume
     )
 
@@ -338,7 +362,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj0,
             intake: intake,
-			primary_length: exh_c1_primary_length,
+			primary_length: total_exh_c1_primary_length,
             exhaust_system: exhaust0,
             ignition_wire: wires.wire1,
 			sound_attenuation: 1.1
@@ -348,7 +372,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj1,
             intake: intake,
-			primary_length: exh_c3_primary_length,
+			primary_length: total_exh_c3_primary_length,
             exhaust_system: exhaust0,
             ignition_wire: wires.wire3,
 			sound_attenuation: 1.0
@@ -358,7 +382,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj2,
             intake: intake,
-			primary_length: exh_c5_primary_length,
+			primary_length: total_exh_c5_primary_length,
             exhaust_system: exhaust0,
             ignition_wire: wires.wire5,
 			sound_attenuation: 0.9
@@ -368,7 +392,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
             intake: intake,
-			primary_length: exh_c7_primary_length,
+			primary_length: total_exh_c7_primary_length,
             exhaust_system: exhaust0,
             ignition_wire: wires.wire7,
 			sound_attenuation: 0.8
@@ -380,7 +404,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj0,
             intake: intake,
-			primary_length: exh_c2_primary_length,
+			primary_length: total_exh_c2_primary_length,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire2,
 			sound_attenuation: 1.1
@@ -390,7 +414,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj1,
             intake: intake,
-			primary_length: exh_c4_primary_length,
+			primary_length: total_exh_c4_primary_length,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire4,
 			sound_attenuation: 1.0
@@ -400,7 +424,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj2,
             intake: intake,
-			primary_length: exh_c6_primary_length,
+			primary_length: total_exh_c6_primary_length,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire6,
 			sound_attenuation: 0.9
@@ -410,7 +434,7 @@ public node BallGanda_LSx_BYOE {
             connecting_rod: connecting_rod(cr_params),
             rod_journal: rj3,
             intake: intake,
-			primary_length: exh_c8_primary_length,
+			primary_length: total_exh_c7_primary_length,
             exhaust_system: exhaust1,
             ignition_wire: wires.wire8,
 			sound_attenuation: 0.8
@@ -629,5 +653,6 @@ public node generic_camshaft_builder {
         .add_lobe(rot360 + intake_lobe_center + 4 * rot) // 6
         .add_lobe(rot360 + intake_lobe_center + 1 * rot) // 8
 }
+
 
 
