@@ -9,10 +9,10 @@ impulse_response_library ir_lib()
 //engine_name
 label engine_name("BallGanda_LSx_BYOE") //Name that shows in app
 
-label sim_freq(3000)
+label sim_freq(10000)
 
 //idle adjustment
-label idle_adjust(0.99)
+label idle_adjust(0.993)
 label idle_cfm(0.1)
 
 /*fuel options: Runs fuel setup i researched params for. The fuels
@@ -29,7 +29,7 @@ label tune_afr(13.5) //afr engine runs at WOT
 //engine layout
 label crank_stroke(4.0 * units.inch)//LS7 
 label crank_mass(57 * units.lb)//LS7  
-label crank_flywheel_mass(26.5 * units.lb)//LS7  
+label crank_flywheel_mass(26.5 + 5 * units.lb)//LS7  
 label crank_flywheel_dia(14 * units.inch)//LS7
 label piston_bore_diameter(4.125 * units.inch)//LS7  
 label piston_comp_height(1.175 * units.inch)//LS7  
@@ -48,23 +48,23 @@ label eng_head1_flip_display(true)
 label timing_advance(0.0)								
 label timing_rpm_0000((0 + timing_advance) * units.deg)
 label timing_rpm_0500((0 + timing_advance) * units.deg)
-label timing_rpm_1000((20 + timing_advance) * units.deg)
+label timing_rpm_1000((0 + timing_advance) * units.deg)
 label timing_rpm_1500((20 + timing_advance) * units.deg)
 label timing_rpm_2000((25 + timing_advance) * units.deg)
-label timing_rpm_2500((30 + timing_advance) * units.deg)
-label timing_rpm_3000((34 + timing_advance) * units.deg)
-label timing_rpm_3500((38 + timing_advance) * units.deg)
-label timing_rpm_4000((44 + timing_advance) * units.deg)
-label timing_rpm_4500((50 + timing_advance) * units.deg)
-label timing_rpm_5000((56 + timing_advance) * units.deg)
-label timing_rpm_5500((62 + timing_advance) * units.deg)
-label timing_rpm_6000((69 + timing_advance) * units.deg)
-label timing_rpm_6500((71 + timing_advance) * units.deg)
-label timing_rpm_7000((73 + timing_advance) * units.deg)
-label timing_rpm_7500((75 + timing_advance) * units.deg)
-label timing_rpm_8000((77 + timing_advance) * units.deg)
-label timing_rpm_8500((79 + timing_advance) * units.deg)
-label timing_rpm_9000((81 + timing_advance) * units.deg)
+label timing_rpm_2500((26 + timing_advance) * units.deg)
+label timing_rpm_3000((27 + timing_advance) * units.deg)
+label timing_rpm_3500((27 + timing_advance) * units.deg)
+label timing_rpm_4000((28 + timing_advance) * units.deg)
+label timing_rpm_4500((29 + timing_advance) * units.deg)
+label timing_rpm_5000((30 + timing_advance) * units.deg)
+label timing_rpm_5500((31 + timing_advance) * units.deg)
+label timing_rpm_6000((32 + timing_advance) * units.deg)
+label timing_rpm_6500((33 + timing_advance) * units.deg)
+label timing_rpm_7000((34 + timing_advance) * units.deg)
+label timing_rpm_7500((35 + timing_advance) * units.deg)
+label timing_rpm_8000((36 + timing_advance) * units.deg)
+label timing_rpm_8500((37 + timing_advance) * units.deg)
+label timing_rpm_9000((38 + timing_advance) * units.deg)
 
 
 //intake manifold 
@@ -144,9 +144,9 @@ label exh_c6_primary_length(32 * units.inch)
 label exh_c7_primary_length(32 * units.inch)
 label exh_c8_primary_length(32 * units.inch)
 label exh_primary_dia(1.875) //in inches. not using units because this is passed to cfm trendline equation
-label exh_collector_dia(3.0) //in inches. not using units because this is passed to cfm trendline equation
-label exh_length_after_collector(15 * units.inch) 
-label exh_type(ir_lib.real_engine_0)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
+label exh_collector_dia(3.5) //in inches. not using units because this is passed to cfm trendline equation
+label exh_length_after_collector(10 * units.inch) 
+label exh_type(ir_lib.default_0)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
 
 //rev limits				
 label redline_engine(7200 * units.rpm)					//LS7
@@ -163,10 +163,11 @@ label start_rpm(999 * units.rpm)
 //###########################################################*/
 
 //Sound
-label eng_snd_hf_gain(0.002)
-label eng_snd_noise(0.2)
+label eng_snd_hf_gain(0.01)
+label eng_snd_noise(1.0)
 label eng_snd_jitter(0.5) 
-label exh_snd_audio_volume(0.4)
+label exh0_snd_audio_volume(0.6)
+label exh1_snd_audio_volume(0.5)
 
 //Advanced
 label crank_position_x(0.0 * units.mm)
@@ -178,7 +179,7 @@ label flywheel_moment(
         disk_moment_of_inertia(mass: crank_flywheel_mass, radius: crank_flywheel_dia / 2)
     )
 label other_moment( 									// Moment from cams, pulleys, etc [estimated]
-        disk_moment_of_inertia(mass: 10 * units.kg, radius: 6.0 * units.cm)
+        disk_moment_of_inertia(mass: 25 * units.lb, radius: 2.4 * units.inch)
     )
 label rod_center_of_mass(0.0)
 label piston_blowby(0.1)
@@ -341,14 +342,14 @@ public node BallGanda_LSx_BYOE {
 
 	exhaust_system exhaust0(
 		es_params,
-		audio_volume: exh_snd_audio_volume,
+		audio_volume: exh0_snd_audio_volume,
 		impulse_response: exh_type,
 		length: exh_length_after_collector
 	)
 	
     exhaust_system exhaust1(
 		es_params,
-		audio_volume: exh_snd_audio_volume,
+		audio_volume: exh1_snd_audio_volume,
 		impulse_response: exh_type,
 		length: exh_length_after_collector
 	)
@@ -653,6 +654,3 @@ public node generic_camshaft_builder {
         .add_lobe(rot360 + intake_lobe_center + 4 * rot) // 6
         .add_lobe(rot360 + intake_lobe_center + 1 * rot) // 8
 }
-
-
-
