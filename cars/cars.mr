@@ -3,21 +3,21 @@ import "engine_sim.mr"
 units units()
 constants constants()
 
-label e36m3sedan_mass(1536 * units.kg)
-public node e36m3sedan_vehicle {
+label bmwe36m3sedan_mass(1536 * units.kg)
+public node bmwe36m3sedan_vehicle {
     alias output __out:
         vehicle(
-            mass: e36m3sedan_mass,
+            mass: bmwe36m3sedan_mass,
             drag_coefficient: 0.32,
             cross_sectional_area: 1.96 * units.m2,
             diff_ratio: 3.23,
             tire_radius: 628 / 2 * units.mm,
             rolling_resistance: 
-				0.015 * e36m3sedan_mass * 9.81 * units.m / (units.sec *  units.sec)
+				0.015 * bmwe36m3sedan_mass * 9.81 * units.m / (units.sec *  units.sec)
         );
 }
 
-public node e36m3sedan_transmission {
+public node bmwe36m3sedan_transmission {
     alias output __out:
         transmission(
             max_clutch_torque: 500 * units.lb_ft
