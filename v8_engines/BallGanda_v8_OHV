@@ -10,10 +10,10 @@ impulse_response_library ir_lib()
 //limitation of the SIM. The timing has to be crazy
 //to make power. turbulence_to_flame_speed_ratio may help.
 //I am still working on better solution than wild ignition timing
-//changed CFM inputs all to @ k_28inH2O
+//changed CFM inputs all to @ k_28inH2O BC that is the data I used
 
 //engine_name
-label engine_name("BallGanda_LSx_BYOE") //Name that shows in app
+label engine_name("BallGanda_BYOLSx_LS7") //Name that shows in app
 
 label sim_freq(10000)
 
@@ -35,21 +35,23 @@ label tune_afr(12.5) //afr engine runs at WOT
 //engine layout
 label crank_stroke(4.0 * units.inch)//LS7 
 label crank_mass(57 * units.lb)//LS7  
-label crank_flywheel_mass(26.5 + 5 * units.lb)//LS7  
+label crank_flywheel_mass(26.5 * units.lb)//LS7  
 label crank_flywheel_dia(14 * units.inch)//LS7
 label piston_bore_diameter(4.125 * units.inch)//LS7  
 label piston_comp_height(1.175 * units.inch)//LS7  
 label piston_mass_wpin(482 * units.g)//LS7 
 label rod_length(6.067 * units.inch)//LS7 
 label rod_mass(464 * units.g)//LS7 
-label eng_compression_ratio(12.0)//LS7  
-label eng_rot_friction_torq(64 * units.lb_ft)//LS7  
+label eng_compression_ratio(11.0)//LS7  
+label eng_rot_friction_torq(50 * units.lb_ft)//estimated
+label eng_rot_inertia_other(25 * units.lb) //estimated clutch, damper, cams, pulleys, etc
+label eng_rot_inertia_other_dia(10.5 * units.inch)//estimated
 label eng_v_angle(90 * units.deg)//LS7
 label eng_angle_in_chassis(0 * units.deg)//LS7
 label eng_head0_flip_display(false)
 label eng_head1_flip_display(true)
 
-//timing 							 
+//timing //wild timing to make power in sim							 
 label timing_advance(0.0)								
 label timing_rpm_0000((25 + timing_advance) * units.deg)
 label timing_rpm_0500((25 + timing_advance) * units.deg)
@@ -72,15 +74,14 @@ label timing_rpm_8500((90 + timing_advance) * units.deg)
 label timing_rpm_9000((90 + timing_advance) * units.deg)
 
 //intake manifold 
-label int_throttle_cfm(1200) //LS7 90mm TB 1170CFM-1369CFM @28"H2O
-label int_man_plenum_vol(5100 * units.cc)//LS7 estimate 5000cc not including runner volume
-label int_man_plenum_xsec_area(63 * units.cm2) 
-label int_man_runner_flow_rate(800)						 
+label int_throttle_body_dia(90) //in mm. passed to CFM estimate. LS7 90mm TB 1145CFM @28"H2O
+label int_man_plenum_vol(5100 * units.cc)//estimate 5100cc not including runner volume
+label int_man_plenum_xsec_area(10 * 12 * units.cm2) //estimate
+label int_man_runner_equiv_dia(1.2 * 2.2) //estimate 1.2 * head_int_valve_dia in inches						 
 label int_man_runner_length(7.5 * units.inch)//LS7 
 
 //camshaft
-label cam_inner_base_circle(1.5 * units.inch)			//LS7 
-
+label cam_inner_base_circle(1.5 * units.inch)//LS7 
 label cam_advance(-3 * units.deg)//LS7 
 label cam_int_lobe_center(120.5 * units.deg)//LS7
 label cam_exh_lobe_center(120.5 * units.deg)//LS7 
@@ -96,11 +97,11 @@ label valve_exh_rocker_ratio_sim(1.8)//LS7
 label head_int_runner_length(5.628 * units.inch)//LS7
 label head_int_runner_vol(259.0 * units.cc)//LS7 
 label head_int_valve_dia(2.2 * units.inch)//LS7
-label head_int_valve2runner_area_ratio(1.7)
+label head_int_valve2runner_area_ratio(1.1)
 label head_exh_runner_length(3.328 * units.inch)
 label head_exh_runner_vol(86 * units.cc)//LS7
 label head_exh_valve_dia(1.61 * units.inch)//LS7
-label head_exh_valve2runner_area_ratio(1.7)
+label head_exh_valve2runner_area_ratio(1.1)
 
 //head flow
 //head intake
@@ -139,16 +140,16 @@ label exh_flow_lift_14_700(270 * exh_flow_scalar)
 label exh_flow_lift_15_750(272 * exh_flow_scalar)
 
 //exhaust
-label exh_c1_primary_length(32 * units.inch)
-label exh_c2_primary_length(32 * units.inch)
-label exh_c3_primary_length(32 * units.inch)
-label exh_c4_primary_length(32 * units.inch)
-label exh_c5_primary_length(32 * units.inch)
-label exh_c6_primary_length(32 * units.inch)
-label exh_c7_primary_length(32 * units.inch)
-label exh_c8_primary_length(32 * units.inch)
-label exh_primary_dia(1.875) //1.875 in inches. not using units because this is passed to cfm trendline equation
-label exh_collector_dia(3.0) //3 in inches. not using units because this is passed to cfm trendline equation
+label exh_c1_primary_length(7 * units.inch) //estimated shorty header stock LS7
+label exh_c2_primary_length(5 * units.inch)
+label exh_c3_primary_length(5 * units.inch)
+label exh_c4_primary_length(7 * units.inch)
+label exh_c5_primary_length(7 * units.inch)
+label exh_c6_primary_length(5 * units.inch)
+label exh_c7_primary_length(5 * units.inch)
+label exh_c8_primary_length(7 * units.inch)
+label exh_primary_dia(1.7) //1.7 in inches. not using units because this is passed to cfm trendline equation
+label exh_collector_dia(3.0) //3.0 in inches. not using units because this is passed to cfm trendline equation
 label exh_length_after_collector(5 * units.inch) //5 inch dump header to atmosphere
 label exh_type(ir_lib.mild_exhaust_0_reverb)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
 
@@ -167,7 +168,7 @@ label rev_cut_duration(0.09)								//LS7
 label rev_limit_ignition(7500 * units.rpm)
 
 //starter
-label start_torque(600 * units.lb_ft)
+label start_torque(150 * units.lb_ft)
 label start_rpm(999 * units.rpm)
 
 /*###########################################################//
@@ -177,15 +178,6 @@ label start_rpm(999 * units.rpm)
 //Advanced
 label crank_position_x(0.0 * units.mm)
 label crank_position_y(0.0 * units.mm)
-label crank_moment_of_inertia(
-        disk_moment_of_inertia(mass: crank_mass, radius: crank_stroke / 2)
-    )
-label flywheel_moment(
-        disk_moment_of_inertia(mass: crank_flywheel_mass, radius: crank_flywheel_dia / 2)
-    )
-label other_moment( 									// Moment from cams, pulleys, etc [estimated]
-        disk_moment_of_inertia(mass: 25 * units.lb, radius: 2.4 * units.inch)
-    )
 label rod_center_of_mass(0.0)
 label piston_blowby(0.1)
 label int_velocity_decay(0.5)
@@ -197,8 +189,8 @@ float cycle(2 * 360 * units.deg)
 float cylinder_vol(constants.pi * (piston_bore_diameter / 2) * (piston_bore_diameter / 2) * crank_stroke)
 float comb_vol_by_CR(cylinder_vol / (eng_compression_ratio - 1.0))
 float exh_volume(exh_length_after_collector * circle_area(exh_collector_dia / 2) * units.inch)
-float valve_int_lift(valve_int_lift_advertised / valve_advertised_lift_rocker_ratio * valve_int_rocker_ratio_sim)					//LS7 
-float valve_exh_lift(valve_exh_lift_advertised / valve_advertised_lift_rocker_ratio * valve_exh_rocker_ratio_sim)					//LS7
+float valve_int_lift(valve_int_lift_advertised / valve_advertised_lift_rocker_ratio * valve_int_rocker_ratio_sim)
+float valve_exh_lift(valve_exh_lift_advertised / valve_advertised_lift_rocker_ratio * valve_exh_rocker_ratio_sim)
 float head_int_runner_xsec_area(head_int_valve2runner_area_ratio * circle_area(head_int_valve_dia / 2))
 float head_exh_runner_xsec_area(head_exh_valve2runner_area_ratio * circle_area(head_exh_valve_dia / 2))
 float total_int_runner_length(head_int_runner_length + int_man_runner_length)
@@ -210,11 +202,26 @@ float total_exh_c5_primary_length(exh_c5_primary_length + head_exh_runner_length
 float total_exh_c6_primary_length(exh_c6_primary_length + head_exh_runner_length)
 float total_exh_c7_primary_length(exh_c7_primary_length + head_exh_runner_length)
 float total_exh_c8_primary_length(exh_c8_primary_length + head_exh_runner_length)
+float crank_moment_of_inertia(
+        disk_moment_of_inertia(mass: crank_mass, radius: crank_stroke / 2)
+    )
+float flywheel_moment(
+        disk_moment_of_inertia(mass: crank_flywheel_mass, radius: crank_flywheel_dia / 2)
+    )
+float other_moment( // Moment from cams, pulleys, etc [estimated]
+        disk_moment_of_inertia(mass: eng_rot_inertia_other, radius: eng_rot_inertia_other_dia / 2)
+    )
 float exh_primary_flow_rate(
 	-17.275*exh_primary_dia*exh_primary_dia*exh_primary_dia+189.197*exh_primary_dia*exh_primary_dia+-159.007*exh_primary_dia+10
 )
 float exh_collector_flow_rate(
 	-17.275*exh_collector_dia*exh_collector_dia*exh_collector_dia+189.197*exh_collector_dia*exh_collector_dia+-159.007*exh_collector_dia+10
+)
+float int_throttle_cfm(
+	constants.pi * int_throttle_body_dia * int_throttle_body_dia / 4 * 0.18
+)
+float int_man_runner_flow_rate(
+	constants.pi * int_man_runner_equiv_dia * 25.4 * int_man_runner_equiv_dia * 25.4 / 4 * 0.18
 )
 
 //fuels setup
@@ -245,7 +252,7 @@ fuel pumpus93gas(
     max_dilution_effect: 10.0
 )
 
-public node BallGanda_LSx_BYOE {
+public node BallGanda_BYOLSx {
     alias output __out: engine;
 
     engine engine(
@@ -290,7 +297,7 @@ public node BallGanda_LSx_BYOE {
         compression_height: piston_comp_height,
         wrist_pin_position: 0.0,
 		blowby: k_28inH2O(piston_blowby),
-        displacement: 0.0						//using compression ratio based calc
+        displacement: 0.0 //using compression ratio based calc
     )
 
     connecting_rod_parameters cr_params(
@@ -594,7 +601,7 @@ public node generic_camshaft_builder {
     input lobe_profile;
     input intake_lobe_profile: lobe_profile;
     input exhaust_lobe_profile: lobe_profile;
-    input lobe_separation: (cam_int_lobe_center - cam_advance + cam_exh_lobe_center) / 2;
+    input lobe_separation: (cam_int_lobe_center - cam_advance + cam_exh_lobe_center + cam_advance) / 2;
     input intake_lobe_center: cam_int_lobe_center - cam_advance;
     input exhaust_lobe_center: cam_exh_lobe_center + cam_advance;
     input advance: 0.0 * units.deg; //advance is in the lobe center calc
@@ -642,5 +649,3 @@ public node generic_camshaft_builder {
         .add_lobe(rot360 + intake_lobe_center + 4 * rot) // 6
         .add_lobe(rot360 + intake_lobe_center + 1 * rot) // 8
 }
-
-
