@@ -4,7 +4,13 @@ units units()
 constants constants()
 impulse_response_library ir_lib()
 
-//
+//Engine setup file is for GM LSx engine
+//The base setup is LS7 505HP engine
+//Note the wild for real life timing. I think its a
+//limitation of the SIM. The timing has to be crazy
+//to make power. turbulence_to_flame_speed_ratio may help.
+//I am still working on better solution than wild ignition timing
+//changed CFM inputs all to @ k_28inH2O
 
 //engine_name
 label engine_name("BallGanda_LSx_BYOE") //Name that shows in app
@@ -12,7 +18,7 @@ label engine_name("BallGanda_LSx_BYOE") //Name that shows in app
 label sim_freq(10000)
 
 //idle adjustment
-label idle_adjust(0.993)
+label idle_adjust(0.9930)
 label idle_cfm(0.1)
 
 /*fuel options: Runs fuel setup i researched params for. The fuels
@@ -24,7 +30,7 @@ are under in "fuels setup". To run default sim fuel use
 
 //fuel setting
 label type_of_fuel(pumpus93gas)	//Fuel type in use
-label tune_afr(13.5) //afr engine runs at WOT
+label tune_afr(12.5) //afr engine runs at WOT
 
 //engine layout
 label crank_stroke(4.0 * units.inch)//LS7 
@@ -43,34 +49,32 @@ label eng_angle_in_chassis(0 * units.deg)//LS7
 label eng_head0_flip_display(false)
 label eng_head1_flip_display(true)
 
-
 //timing 							 
 label timing_advance(0.0)								
-label timing_rpm_0000((0 + timing_advance) * units.deg)
-label timing_rpm_0500((0 + timing_advance) * units.deg)
-label timing_rpm_1000((0 + timing_advance) * units.deg)
-label timing_rpm_1500((20 + timing_advance) * units.deg)
-label timing_rpm_2000((25 + timing_advance) * units.deg)
-label timing_rpm_2500((26 + timing_advance) * units.deg)
-label timing_rpm_3000((27 + timing_advance) * units.deg)
-label timing_rpm_3500((27 + timing_advance) * units.deg)
-label timing_rpm_4000((28 + timing_advance) * units.deg)
-label timing_rpm_4500((29 + timing_advance) * units.deg)
-label timing_rpm_5000((30 + timing_advance) * units.deg)
-label timing_rpm_5500((31 + timing_advance) * units.deg)
-label timing_rpm_6000((32 + timing_advance) * units.deg)
-label timing_rpm_6500((33 + timing_advance) * units.deg)
-label timing_rpm_7000((34 + timing_advance) * units.deg)
-label timing_rpm_7500((35 + timing_advance) * units.deg)
-label timing_rpm_8000((36 + timing_advance) * units.deg)
-label timing_rpm_8500((37 + timing_advance) * units.deg)
-label timing_rpm_9000((38 + timing_advance) * units.deg)
-
+label timing_rpm_0000((25 + timing_advance) * units.deg)
+label timing_rpm_0500((25 + timing_advance) * units.deg)
+label timing_rpm_1000((30 + timing_advance) * units.deg)
+label timing_rpm_1500((30 + timing_advance) * units.deg)
+label timing_rpm_2000((33 + timing_advance) * units.deg)
+label timing_rpm_2500((37 + timing_advance) * units.deg)
+label timing_rpm_3000((40 + timing_advance) * units.deg)
+label timing_rpm_3500((48 + timing_advance) * units.deg)
+label timing_rpm_4000((52 + timing_advance) * units.deg)
+label timing_rpm_4500((60 + timing_advance) * units.deg)
+label timing_rpm_5000((63 + timing_advance) * units.deg)
+label timing_rpm_5500((75 + timing_advance) * units.deg)
+label timing_rpm_6000((80 + timing_advance) * units.deg)
+label timing_rpm_6500((80 + timing_advance) * units.deg)
+label timing_rpm_7000((80 + timing_advance) * units.deg)
+label timing_rpm_7500((80 + timing_advance) * units.deg)
+label timing_rpm_8000((90 + timing_advance) * units.deg)
+label timing_rpm_8500((90 + timing_advance) * units.deg)
+label timing_rpm_9000((90 + timing_advance) * units.deg)
 
 //intake manifold 
-label int_throttle_cfm(1170) //LS7 90mm TB 1170CFM
-label int_man_plenum_vol(5000 * units.cc)//LS7 estimate 5000cc not including runner volume
-label int_man_plenum_xsec_area(50 * units.cm2) 
+label int_throttle_cfm(1200) //LS7 90mm TB 1170CFM-1369CFM @28"H2O
+label int_man_plenum_vol(5100 * units.cc)//LS7 estimate 5000cc not including runner volume
+label int_man_plenum_xsec_area(63 * units.cm2) 
 label int_man_runner_flow_rate(800)						 
 label int_man_runner_length(7.5 * units.inch)//LS7 
 
@@ -89,19 +93,19 @@ label valve_int_rocker_ratio_sim(1.8)//LS7
 label valve_exh_rocker_ratio_sim(1.8)//LS7
 
 //head
-label head_int_runner_length(5.628 * units.inch) //LS7
-label head_int_runner_vol(259.0 * units.cc)				//LS7 
-label head_int_valve_dia(2.2 * units.inch)
+label head_int_runner_length(5.628 * units.inch)//LS7
+label head_int_runner_vol(259.0 * units.cc)//LS7 
+label head_int_valve_dia(2.2 * units.inch)//LS7
 label head_int_valve2runner_area_ratio(1.7)
 label head_exh_runner_length(3.328 * units.inch)
-label head_exh_runner_vol(86 * units.cc)
-label head_exh_valve_dia(1.61 * units.inch)			//LS7
+label head_exh_runner_vol(86 * units.cc)//LS7
+label head_exh_valve_dia(1.61 * units.inch)//LS7
 label head_exh_valve2runner_area_ratio(1.7)
 
 //head flow
-//intake
+//head intake
 label int_flow_scalar(1.0)
-label int_flow_lift_01_050(32 * int_flow_scalar)			//LS7 
+label int_flow_lift_01_050(32 * int_flow_scalar)//LS7 stock flows 
 label int_flow_lift_02_100(66.2 * int_flow_scalar)
 label int_flow_lift_03_150(109 * int_flow_scalar)
 label int_flow_lift_04_200(151 * int_flow_scalar)
@@ -116,9 +120,9 @@ label int_flow_lift_12_600(332 * int_flow_scalar)
 label int_flow_lift_13_650(350 * int_flow_scalar)
 label int_flow_lift_14_700(359 * int_flow_scalar)
 label int_flow_lift_15_750(261 * int_flow_scalar)
-//exhaust
+//head exhaust
 label exh_flow_scalar(1.0)
-label exh_flow_lift_01_050(21.5 * exh_flow_scalar)			//LS7
+label exh_flow_lift_01_050(21.5 * exh_flow_scalar)//LS7 stock flows
 label exh_flow_lift_02_100(47.3 * exh_flow_scalar)
 label exh_flow_lift_03_150(81.5 * exh_flow_scalar)
 label exh_flow_lift_04_200(111 * exh_flow_scalar)
@@ -143,16 +147,24 @@ label exh_c5_primary_length(32 * units.inch)
 label exh_c6_primary_length(32 * units.inch)
 label exh_c7_primary_length(32 * units.inch)
 label exh_c8_primary_length(32 * units.inch)
-label exh_primary_dia(1.875) //in inches. not using units because this is passed to cfm trendline equation
-label exh_collector_dia(3.5) //in inches. not using units because this is passed to cfm trendline equation
-label exh_length_after_collector(10 * units.inch) 
-label exh_type(ir_lib.default_0)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
+label exh_primary_dia(1.875) //1.875 in inches. not using units because this is passed to cfm trendline equation
+label exh_collector_dia(3.0) //3 in inches. not using units because this is passed to cfm trendline equation
+label exh_length_after_collector(5 * units.inch) //5 inch dump header to atmosphere
+label exh_type(ir_lib.mild_exhaust_0_reverb)					//default_0,real_engine_0,real_engine_1,real_engine_2,sharp_0,mild_exhaust_0,mild_exhaust_0_reverb,minimal_muffling_01,minimal_muffling_02,minimal_muffling_03
+
+//Sound
+label eng_snd_hf_gain(0.0000001)
+label eng_snd_lf_noise(0.3) //lf noise is noise
+label eng_snd_hf_noise(0.05) //hf noise is jitter
+label eng_convolution(0.9) //not used yet have to manually set in gui
+label exh0_snd_audio_volume(1)
+label exh1_snd_audio_volume(0.9)
 
 //rev limits				
-label redline_engine(7200 * units.rpm)					//LS7
-label rev_limit_cutout(7600 * units.rpm)				//LS7 
-label rev_cut_duration(0.1)								//LS7 
-label rev_limit_ignition(8000 * units.rpm)
+label redline_engine(7000 * units.rpm)					//LS7
+label rev_limit_cutout(7250 * units.rpm)				//LS7 
+label rev_cut_duration(0.09)								//LS7 
+label rev_limit_ignition(7500 * units.rpm)
 
 //starter
 label start_torque(600 * units.lb_ft)
@@ -161,13 +173,6 @@ label start_rpm(999 * units.rpm)
 /*###########################################################//
 //################END OF TUNING INPUTS#######################//
 //###########################################################*/
-
-//Sound
-label eng_snd_hf_gain(0.01)
-label eng_snd_noise(1.0)
-label eng_snd_jitter(0.5) 
-label exh0_snd_audio_volume(0.6)
-label exh1_snd_audio_volume(0.5)
 
 //Advanced
 label crank_position_x(0.0 * units.mm)
@@ -220,9 +225,9 @@ fuel pumpus87gas(
     energy_density: 44 * units.kJ / units.g,
     density: 0.73 * units.kg / units.L,
     molecular_afr: 12.5,
-    max_burning_efficiency: 0.85,
-    burning_efficiency_randomness: 0.5,
-    low_efficiency_attenuation: 0.6,
+    max_burning_efficiency: 0.9,
+    burning_efficiency_randomness: 0.2,
+    low_efficiency_attenuation: 0.8,
     max_turbulence_effect: 2.0,
     max_dilution_effect: 10.0
 )
@@ -233,9 +238,9 @@ fuel pumpus93gas(
     energy_density: 44 * units.kJ / units.g,
     density: 0.73 * units.kg / units.L,
     molecular_afr: 12.5,
-    max_burning_efficiency: 0.85,
-    burning_efficiency_randomness: 0.5,
-    low_efficiency_attenuation: 0.6,
+    max_burning_efficiency: 0.9,
+    burning_efficiency_randomness: 0.2,
+    low_efficiency_attenuation: 0.8,
     max_turbulence_effect: 2.0,
     max_dilution_effect: 10.0
 )
@@ -252,8 +257,8 @@ public node BallGanda_LSx_BYOE {
 		simulation_frequency: sim_freq,
 		throttle_gamma: 2.0,
 		hf_gain: eng_snd_hf_gain,
-        noise: eng_snd_noise,
-        jitter: eng_snd_jitter
+        noise: eng_snd_lf_noise,
+        jitter: eng_snd_hf_noise
     )
 
     crankshaft c0(
@@ -306,35 +311,18 @@ public node BallGanda_LSx_BYOE {
     intake intake(
         plenum_volume: int_man_plenum_vol,
         plenum_cross_section_area: int_man_plenum_xsec_area,
-		runner_flow_rate: k_carb(int_man_runner_flow_rate),
+		runner_flow_rate: k_28inH2O(int_man_runner_flow_rate), //k_carb
         runner_length: total_int_runner_length,
-        intake_flow_rate: k_carb(int_throttle_cfm),
-        idle_flow_rate: k_carb(idle_cfm),
+        intake_flow_rate: k_28inH2O(int_throttle_cfm), //k_carb
+        idle_flow_rate: k_28inH2O(idle_cfm), //k_carb
         idle_throttle_plate_position: idle_adjust,
 		molecular_afr: tune_afr,
         velocity_decay: int_velocity_decay
     )
 
-    exhaust_system_parameters es_params0(
-        outlet_flow_rate: k_carb(1305),
-		collector_cross_section_area: circle_area(3.5 * units.inch),
-        primary_flow_rate: k_carb(261),
-        velocity_decay: 1.0, //0.5
-		volume: 10 * units.L
-        
-    )
-	exhaust_system_parameters es_params1(
-        outlet_flow_rate: k_carb(1305),
-		collector_cross_section_area: circle_area(3.5 * units.inch),
-        primary_flow_rate: k_carb(261),
-        velocity_decay: 1.0, //0.5
-		volume: 10 * units.L
-        
-    )
-
     exhaust_system_parameters es_params(
-        outlet_flow_rate: k_carb(exh_collector_flow_rate),
-        primary_flow_rate: k_carb(exh_primary_flow_rate),
+        outlet_flow_rate: k_28inH2O(exh_collector_flow_rate), //k_carb
+        primary_flow_rate: k_28inH2O(exh_primary_flow_rate), //k_carb
         velocity_decay: exh_velocity_decay,
 		collector_cross_section_area: circle_area(exh_collector_dia / 2 * units.inch),
         volume: exh_volume
@@ -654,3 +642,5 @@ public node generic_camshaft_builder {
         .add_lobe(rot360 + intake_lobe_center + 4 * rot) // 6
         .add_lobe(rot360 + intake_lobe_center + 1 * rot) // 8
 }
+
+
