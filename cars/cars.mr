@@ -3,6 +3,7 @@ import "engine_sim.mr"
 units units()
 constants constants()
 
+//bmw e36 m3 sedan
 label bmwe36m3sedan_mass(1536 * units.kg)
 public node bmwe36m3sedan_vehicle {
     alias output __out:
@@ -16,7 +17,6 @@ public node bmwe36m3sedan_vehicle {
 				0.015 * bmwe36m3sedan_mass * 9.81 * units.m / (units.sec *  units.sec)
         );
 }
-
 public node bmwe36m3sedan_transmission {
     alias output __out:
         transmission(
@@ -29,129 +29,136 @@ public node bmwe36m3sedan_transmission {
         .add_gear(1.0);
 }
 
-//set_vehicle(impreza())
-// label impreza_mass(1600 * units.kg)
-// private node impreza {
-    // alias output __out:
-        // vehicle(
-            // mass: car_mass,
-            // drag_coefficient: 0.3,
-            // cross_sectional_area: (72 * units.inch) * (56 * units.inch),
-            // diff_ratio: 3.9,
-            // tire_radius: 10 * units.inch,
-            // rolling_resistance: 0.015 * car_mass * 9.81 
-        // );
-// }   
-//set_transmission(impreza_transmission())
-// private node impreza_transmission {
-    // alias output __out:
-        // transmission(
-            // max_clutch_torque: 300 * units.lb_ft
-        // )
-        // .add_gear(3.636)
-        // .add_gear(2.375)
-        // .add_gear(1.761)
-        // .add_gear(1.346)
-        // .add_gear(0.971)
-        // .add_gear(0.756);
-// }
+//bmw e39 m5
+label bmwe39m5_mass(1795 * units.kg)
+public node bmwe39m5_vehicle {
+    alias output __out:
+        vehicle(
+            mass: bmwe39m5_mass,
+            drag_coefficient: 0.29,
+            cross_sectional_area: 2.17 * units.m2,
+            diff_ratio: 3.15,
+            tire_radius: 650.3 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * bmwe39m5_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node bmwe39m5_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 800 * units.lb_ft
+        )
+        .add_gear(4.23)
+        .add_gear(2.53)
+        .add_gear(1.67)
+        .add_gear(1.23)
+		.add_gear(1.00)
+        .add_gear(0.83);
+}
 
-//set_vehicle(integra_type_r())
-// private node integra_type_r {
-    // alias output __out:
-        // vehicle(
-            // mass: 2400 * units.lb,
-            // drag_coefficient: 0.2,
-            // cross_sectional_area: (66 * units.inch) * (50 * units.inch),
-            // diff_ratio: 3.55,
-            // tire_radius: 10 * units.inch,
-            // rolling_resistance: 300 * units.N
-        // );
-// }
-//set_transmission(integra_type_r_transmission())
-// private node integra_type_r_transmission {
-    // alias output __out:
-        // transmission(
-            // max_clutch_torque: 300 * units.lb_ft
-        // )
-        // .add_gear(3.23)
-        // .add_gear(2.105)
-        // .add_gear(1.458)
-        // .add_gear(1.107)
-        // .add_gear(0.848);
-// }
+//Mazda Miata MX5 NB 3rd gen
+label mazdamx5nb_mass(1025 * units.kg)
+public node mazdamx5nb_vehicle {
+    alias output __out:
+        vehicle(
+            mass: mazdamx5nb_mass,
+            drag_coefficient: 0.36,
+            cross_sectional_area: 1.64 * units.m2,
+            diff_ratio: 3.91,
+            tire_radius: 591.82 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mazdamx5nb_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node mazdamx5nb_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 300 * units.lb_ft
+        )
+        .add_gear(3.760)
+        .add_gear(2.269)
+        .add_gear(1.645)
+        .add_gear(1.257)
+		.add_gear(1.000)
+        .add_gear(0.843);
+}
 
-// private node lfa_vehicle {
-    // alias output __out:
-        // vehicle(
-            // mass: 1614 * units.kg,
-            // drag_coefficient: 0.3,
-            // cross_sectional_area: (72 * units.inch) * (50 * units.inch),
-            // diff_ratio: 3.42,
-            // tire_radius: 10 * units.inch,
-            // rolling_resistance: 200 * units.N
-        // );
-// }
+//Mazda RX7 2002 FD3S8
+label mazdrx7fd3s8usa_mass(1280 * units.kg)
+public node mazdrx7fd3s8usa_vehicle {
+    alias output __out:
+        vehicle(
+            mass: mazdrx7fd3s8usa_mass,
+            drag_coefficient: 0.33,
+            cross_sectional_area: 1.747 * units.m2,
+            diff_ratio: 4.10,
+            tire_radius: 635 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mazdrx7fd3s8usa_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node mazdrx7fd3s8usa_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 500 * units.lb_ft
+        )
+        .add_gear(3.483)
+        .add_gear(2.015)
+        .add_gear(1.391)
+        .add_gear(1.000)
+        .add_gear(0.719);
+}
 
-// private node lfa_transmission {
-    // alias output __out:
-        // transmission(
-            // max_clutch_torque: 500 * units.lb_ft
-        // )
-        // .add_gear(3.23)
-        // .add_gear(2.19)
-        // .add_gear(1.61)
-        // .add_gear(1.23)
-        // .add_gear(0.97)
-        // .add_gear(0.8);
-// }
+//Toyota Supra A80 MK4
+label toyotasupramk4_mass(1490 * units.kg)
+public node toyotasupramk4_vehicle {
+    alias output __out:
+        vehicle(
+            mass: toyotasupramk4_mass,
+            drag_coefficient: 0.32,
+            cross_sectional_area: 1.87 * units.m2,
+            diff_ratio: 3.133,
+            tire_radius: 635 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * toyotasupramk4_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node toyotasupramk4_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 500 * units.lb_ft
+        )
+        .add_gear(3.837)
+        .add_gear(2.360)
+        .add_gear(1.685)
+        .add_gear(1.312)
+		.add_gear(1.000)
+        .add_gear(0.793);
+}
 
-// private node corvette {
-    // alias output __out:
-        // vehicle(
-            // mass: 1614 * units.kg,
-            // drag_coefficient: 0.3,
-            // cross_sectional_area: (72 * units.inch) * (50 * units.inch),
-            // diff_ratio: 3.42,
-            // tire_radius: 10 * units.inch,
-            // rolling_resistance: 200 * units.N
-        // );
-// }
-
-// private node corvette_transmission {
-    // alias output __out:
-        // transmission(
-            // max_clutch_torque: 500 * units.lb_ft
-        // )
-        // .add_gear(2.97)
-        // .add_gear(2.07)
-        // .add_gear(1.43)
-        // .add_gear(1.00)
-        // .add_gear(0.71)
-        // .add_gear(0.57);
-// }
-
-// private node supra_vehicle {
-    // alias output __out:
-        // vehicle(
-            // mass: 3400 * units.lb,
-            // drag_coefficient: 0.4,
-            // cross_sectional_area: (66 * units.inch) * (50 * units.inch),
-            // diff_ratio: 3.15,
-            // tire_radius: 10 * units.inch,
-            // rolling_resistance: 500 * units.N
-        // );
-// }
-
-// private node supra_transmission {
-    // alias output __out:
-        // transmission(
-            // max_clutch_torque: 500 * units.lb_ft
-        // )
-        // .add_gear(5.25)
-        // .add_gear(3.36)
-        // .add_gear(2.17)
-        // .add_gear(1.72)
-        // .add_gear(1.32)
-        // .add_gear(1.0);
-// }
+//Nissan 350Z 2002
+label nissan350z_mass(1470 * units.kg)
+public node nissan350z_vehicle {
+    alias output __out:
+        vehicle(
+            mass: nissan350z_mass,
+            drag_coefficient: 0.31,
+            cross_sectional_area: 1.94 * units.m2,
+            diff_ratio: 3.538,
+            tire_radius: 659 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * nissan350z_mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node nissan350z_transmission {
+    alias output __out:
+        transmission(
+            max_clutch_torque: 500 * units.lb_ft
+        )
+        .add_gear(3.794)
+        .add_gear(2.324)
+        .add_gear(1.624)
+        .add_gear(1.271)
+		.add_gear(1.000)
+        .add_gear(0.974);
+}
