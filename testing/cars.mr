@@ -1,0 +1,173 @@
+import "engine_sim.mr"
+
+units units()
+constants constants()
+
+//bmw e36 m3 sedan
+public node bmwe36m3sedan_vehicle {
+    input mass: 1536 * units.kg;
+	input diff_ratio: 3.23;
+	alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.32,
+            cross_sectional_area: 1.96 * units.m2,
+            diff_ratio: diff_ratio,
+            tire_radius: 628 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node bmwe36m3sedan_transmission {
+    input max_clutch_torque: 500 * units.lb_ft;
+	alias output __out:
+        transmission(
+            max_clutch_torque: max_clutch_torque
+        )
+        .add_gear(4.2)
+        .add_gear(2.49)
+        .add_gear(1.66)
+        .add_gear(1.24)
+        .add_gear(1.0);
+}
+
+//bmw e39 m5
+public node bmwe39m5_vehicle {
+    input mass: 1795 * units.kg;
+	input diff_ratio: 3.15;
+	alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.29,
+            cross_sectional_area: 2.17 * units.m2,
+            diff_ratio: diff_ratio,
+            tire_radius: 650.3 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node bmwe39m5_transmission {
+	input max_clutch_torque: 800 * units.lb_ft;
+	alias output __out:
+        transmission(
+			max_clutch_torque: max_clutch_torque
+		)
+        .add_gear(4.23)
+        .add_gear(2.53)
+        .add_gear(1.67)
+        .add_gear(1.23)
+		.add_gear(1.00)
+        .add_gear(0.83);
+}
+
+//Mazda Miata MX5 NB 3rd gen
+public node mazdamx5nb_vehicle {
+	input mass: 1025 * units.kg;
+    input diff_ratio: 3.91;
+	alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.36,
+            cross_sectional_area: 1.64 * units.m2,
+            diff_ratio: diff_ratio,
+            tire_radius: 591.82 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node mazdamx5nb_transmission {
+	input max_clutch_torque: 300 * units.lb_ft;
+    alias output __out:
+        transmission(
+			max_clutch_torque: max_clutch_torque
+		)
+        .add_gear(3.760)
+        .add_gear(2.269)
+        .add_gear(1.645)
+        .add_gear(1.257)
+		.add_gear(1.000)
+        .add_gear(0.843);
+}
+
+//Mazda RX7 2002 FD3S8
+public node mazdrx7fd3s8usa_vehicle {
+	input mass: 1280 * units.kg;
+    alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.33,
+            cross_sectional_area: 1.747 * units.m2,
+            diff_ratio: 4.10,
+            tire_radius: 635 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node mazdrx7fd3s8usa_transmission {
+	input max_clutch_torque: 500 * units.lb_ft;
+    alias output __out:
+        transmission(
+			max_clutch_torque: max_clutch_torque
+		)
+        .add_gear(3.483)
+        .add_gear(2.015)
+        .add_gear(1.391)
+        .add_gear(1.000)
+        .add_gear(0.719);
+}
+
+//Toyota Supra A80 MK4
+public node toyotasupramk4_vehicle {
+	input mass: 1490 * units.kg;
+    alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.32,
+            cross_sectional_area: 1.87 * units.m2,
+            diff_ratio: 3.133,
+            tire_radius: 635 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node toyotasupramk4_transmission {
+	input max_clutch_torque: 500 * units.lb_ft;
+    alias output __out:
+        transmission(
+			max_clutch_torque: max_clutch_torque
+		)
+        .add_gear(3.837)
+        .add_gear(2.360)
+        .add_gear(1.685)
+        .add_gear(1.312)
+		.add_gear(1.000)
+        .add_gear(0.793);
+}
+
+//Nissan 350Z 2002
+public node nissan350z_vehicle {
+	input mass: 1470 * units.kg;
+    alias output __out:
+        vehicle(
+            mass: mass,
+            drag_coefficient: 0.31,
+            cross_sectional_area: 1.94 * units.m2,
+            diff_ratio: 3.538,
+            tire_radius: 659 / 2 * units.mm,
+            rolling_resistance: 
+				0.015 * mass * 9.81 * units.m / (units.sec *  units.sec)
+        );
+}
+public node nissan350z_transmission {
+	input max_clutch_torque: 500 * units.lb_ft;
+    alias output __out:
+        transmission(
+			max_clutch_torque: max_clutch_torque
+		)
+        .add_gear(3.794)
+        .add_gear(2.324)
+        .add_gear(1.624)
+        .add_gear(1.271)
+		.add_gear(1.000)
+        .add_gear(0.974);
+}
