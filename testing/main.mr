@@ -1,0 +1,27 @@
+units units()
+import "engine_sim.mr"
+import "themes/default.mr"
+import "cars/cars.mr"
+//import "engines/BallGanda_i6_vvtec_uh.mr"
+import "engines/BallGanda_LS7_mod.mr"
+
+
+
+use_default_theme()
+
+set_engine(
+	BallGanda_LS7_mod()
+)
+
+set_vehicle(
+	bmwe36m3sedan_vehicle(
+		mass: 1450 * units.kg,
+		diff_ratio: 3.15
+	)
+)
+
+set_transmission(
+	bmwe39m5_transmission(
+		max_clutch_torque: 1200 * units.lb_ft
+	)
+)
